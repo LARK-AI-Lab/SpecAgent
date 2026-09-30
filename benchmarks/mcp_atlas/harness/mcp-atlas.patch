@@ -1,0 +1,305 @@
+diff --git a/run_eval.py b/run_eval.py
+index 57df0ee..39f3205 100644
+--- a/run_eval.py
++++ b/run_eval.py
+@@ -36,6 +36,7 @@ import json
+ import os
+ import subprocess
+ import sys
++import time
+ from typing import Any
+ 
+ import aiohttp
+@@ -125,6 +126,7 @@ async def run_one_task(
+ ) -> dict[str, str]:
+     """Post one task to the harness and shape the response into a CSV row."""
+     async with sem:
++        started = time.monotonic()
+         task_id = str(task.get("TASK") or task.get("task_id") or "").strip()
+         prompt = task.get("PROMPT") or ""
+         enabled_tools = parse_enabled_tools(task.get("ENABLED_TOOLS", "[]"))
+@@ -166,6 +168,8 @@ async def run_one_task(
+                         "task_id": task_id,
+                         "raw_conversation_history": "",
+                         "response": f"ERROR: HTTP {resp.status}: {text}",
++                        "usage_json": "[]",
++                        "wall_seconds": f"{time.monotonic() - started:.3f}",
+                     }
+                 data = await resp.json()
+         except asyncio.TimeoutError:
+@@ -173,27 +177,37 @@ async def run_one_task(
+                 "task_id": task_id,
+                 "raw_conversation_history": "",
+                 "response": f"ERROR: timeout after {args.timeout}s",
++                "usage_json": "[]",
++                "wall_seconds": f"{time.monotonic() - started:.3f}",
+             }
+         except Exception as exc:
+             return {
+                 "task_id": task_id,
+                 "raw_conversation_history": "",
+                 "response": f"ERROR: {exc.__class__.__name__}: {exc}",
++                "usage_json": "[]",
++                "wall_seconds": f"{time.monotonic() - started:.3f}",
+             }
+ 
+-        # data is a list of {type, data} items. Pull out the trajectory and
+-        # final assistant message.
++        # data is a list of {type, data} items. A transport or loop error can
++        # leave an earlier assistant planning message in the trajectory; it is
++        # not a completed answer.
+         trajectory_msgs = [item["data"] for item in data if item.get("type") == "message"]
+-        final = ""
+-        for msg in reversed(trajectory_msgs):
+-            if msg.get("role") == "assistant" and msg.get("content"):
+-                final = msg["content"]
+-                break
++        errors = [item.get("data") for item in data if item.get("type") == "error"]
++        last = trajectory_msgs[-1] if trajectory_msgs else {}
++        if errors:
++            final = f"ERROR: agent run ended with {errors[-1]}"
++        elif last.get("role") != "assistant" or last.get("tool_calls"):
++            final = "ERROR: agent run ended without a terminal assistant answer"
++        else:
++            final = last.get("content") or ""
+ 
+         return {
+             "task_id": task_id,
+             "raw_conversation_history": json.dumps(trajectory_msgs),
+             "response": final,
++            "usage_json": json.dumps([item["data"] for item in data if item.get("type") == "usage"]),
++            "wall_seconds": f"{time.monotonic() - started:.3f}",
+         }
+ 
+ 
+@@ -278,7 +292,7 @@ async def run_all(args: argparse.Namespace) -> None:
+         return
+ 
+     sem = asyncio.Semaphore(args.concurrency)
+-    fieldnames = ["task_id", "raw_conversation_history", "response"]
++    fieldnames = ["task_id", "raw_conversation_history", "response", "usage_json", "wall_seconds"]
+     write_header = not os.path.exists(args.output)
+     out_lock = asyncio.Lock()
+ 
+diff --git a/services/agent-environment/src/agent_environment/mcp_client.py b/services/agent-environment/src/agent_environment/mcp_client.py
+index f5b65f6..92d3232 100644
+--- a/services/agent-environment/src/agent_environment/mcp_client.py
++++ b/services/agent-environment/src/agent_environment/mcp_client.py
+@@ -123,6 +123,8 @@ if "mcpServers" in config:
+             logger.info(
+                 f"Randomized env for server '{server_name}': selected from {len(env_list)} options"
+             )
++        if server_config.get("command") == "uvx" and os.getenv("UV_CONSTRAINT"):
++            server_config.setdefault("env", {})["UV_CONSTRAINT"] = os.environ["UV_CONSTRAINT"]
+ 
+ 
+ async def log_handler(message: LogMessage) -> None:
+diff --git a/services/agent-environment/src/agent_environment/mcp_server_template.json b/services/agent-environment/src/agent_environment/mcp_server_template.json
+index cef141c..e8ebefd 100644
+--- a/services/agent-environment/src/agent_environment/mcp_server_template.json
++++ b/services/agent-environment/src/agent_environment/mcp_server_template.json
+@@ -22,7 +22,10 @@
+     "arxiv": {
+       "command": "uvx",
+       "args": [
+-        "arxiv-mcp-server==0.2.11"
++        "--from",
++        "arxiv-mcp-server==0.2.11",
++        "python",
++        "/agent-environment/src/agent_environment/arxiv_mcp_wrapper.py"
+       ]
+     },
+     "brave-search": {
+@@ -55,25 +58,22 @@
+       }
+     },
+     "clinicaltrialsgov-mcp-server": {
+-      "command": "npx",
+-      "args": [
+-        "clinicaltrialsgov-mcp-server@1.0.8"
+-      ],
++      "command": "clinicaltrialsgov-mcp-server",
++      "args": [],
++      "install_package": "clinicaltrialsgov-mcp-server@1.0.8",
+       "env": {
+         "MCP_LOG_LEVEL": "info"
+       }
+     },
+     "context7": {
+-      "command": "npx",
+-      "args": [
+-        "@upstash/context7-mcp@1.0.14"
+-      ]
++      "command": "context7-mcp",
++      "args": [],
++      "install_package": "@upstash/context7-mcp@1.0.14"
+     },
+     "ddg-search": {
+-      "command": "uvx",
+-      "args": [
+-        "duckduckgo-mcp-server==0.5.0"
+-      ]
++      "command": "duckduckgo-mcp-server",
++      "args": [],
++      "install_package": "duckduckgo-mcp-server==0.5.0"
+     },
+     "desktop-commander": {
+       "command": "npx",
+@@ -297,8 +297,9 @@
+       "args": [
+         "--from",
+         "wikipedia-mcp==2.0.1",
+-        "wikipedia-mcp"
++        "python",
++        "/agent-environment/src/agent_environment/wikipedia_mcp_wrapper.py"
+       ]
+     }
+   }
+-}
+\ No newline at end of file
++}
+diff --git a/services/agent-environment/tests/test_mcp_config_sync.py b/services/agent-environment/tests/test_mcp_config_sync.py
+index 57f7ef9..2873cd7 100644
+--- a/services/agent-environment/tests/test_mcp_config_sync.py
++++ b/services/agent-environment/tests/test_mcp_config_sync.py
+@@ -48,6 +48,11 @@ def extract_packages_from_config():
+     packages = {"npx": [], "uvx": []}
+ 
+     for server_name, server_config in config["mcpServers"].items():
++        installed_package = server_config.get("install_package")
++        if installed_package:
++            manager = "uvx" if "==" in installed_package else "npx"
++            packages[manager].append(installed_package)
++            continue
+         command = server_config.get("command")
+         if command in ["npx", "uvx"]:
+             args = server_config.get("args", [])
+diff --git a/services/agent-harness/src/mcp-agent/agent-evals/agent-eval.ts b/services/agent-harness/src/mcp-agent/agent-evals/agent-eval.ts
+index 5028f9f..b8d5b84 100644
+--- a/services/agent-harness/src/mcp-agent/agent-evals/agent-eval.ts
++++ b/services/agent-harness/src/mcp-agent/agent-evals/agent-eval.ts
+@@ -19,7 +19,8 @@ import { z } from 'zod';
+ const DEFAULT_MAX_TURNS = 256;
+ const DEFAULT_MAX_TOOL_CALLS = 100;
+ 
+-type AgentOutput = { type: 'message'; data: Message } | { type: 'error'; data: any };
++type AgentOutput = { type: 'message'; data: Message } | { type: 'error'; data: any }
++  | { type: 'usage'; data: Record<string, unknown> };
+ 
+ interface RunAgentAPIOptions {
+   mcpClient: MCPClient;
+@@ -210,8 +211,12 @@ async function* runMcpAgent({
+           break;
+         } catch (retryError: any) {
+           const status = retryError?.response?.status || retryError?.status;
+-          const isTimeout = retryError?.code === 'ECONNABORTED' || retryError?.message?.includes('timeout');
+-          const isRetryable = status === 500 || status === 502 || status === 503 || status === 429 || isTimeout;
++          const code = retryError?.code || retryError?.cause?.code;
++          const isTimeout = code === 'ECONNABORTED' || retryError?.message?.includes('timeout');
++          const isNetworkError = ['ECONNRESET', 'EAI_AGAIN', 'ETIMEDOUT', 'UND_ERR_SOCKET'].includes(code)
++            || retryError?.message?.includes('socket disconnected before secure TLS connection');
++          const isRetryable = [408, 425, 429, 500, 502, 503, 504, 520, 522, 523, 524].includes(status)
++            || isTimeout || isNetworkError;
+           if (isRetryable && retry < MAX_LLM_RETRIES - 1) {
+             const waitSec = isTimeout ? 15 : (status === 429 ? Math.min(2 ** retry * 5, 30) : 10);
+             const logMsg = isTimeout
+@@ -226,7 +231,10 @@ async function* runMcpAgent({
+         }
+       }
+ 
+-      const { message } = result!;
++      const { message, usage } = result!;
++      if (usage) {
++        yield { type: 'usage', data: usage };
++      }
+ 
+       assistantMessage = AssistantMessageSchema.parse(message);
+     } catch (error) {
+diff --git a/services/agent-harness/src/mcp-agent/agent-evals/completion-strategy.ts b/services/agent-harness/src/mcp-agent/agent-evals/completion-strategy.ts
+index fa2ec20..19cba7f 100644
+--- a/services/agent-harness/src/mcp-agent/agent-evals/completion-strategy.ts
++++ b/services/agent-harness/src/mcp-agent/agent-evals/completion-strategy.ts
+@@ -11,6 +11,7 @@ export interface BaseCompletionRequest {
+ 
+ export interface BaseCompletionResult {
+   message: Message;
++  usage?: Record<string, unknown>;
+ }
+ 
+ export interface AgentCompletionStrategy<
+diff --git a/services/agent-harness/src/mcp-agent/agent-evals/strategies/litellm-strategy.ts b/services/agent-harness/src/mcp-agent/agent-evals/strategies/litellm-strategy.ts
+index 9a9988b..d500a52 100644
+--- a/services/agent-harness/src/mcp-agent/agent-evals/strategies/litellm-strategy.ts
++++ b/services/agent-harness/src/mcp-agent/agent-evals/strategies/litellm-strategy.ts
+@@ -15,7 +15,8 @@ import { logger } from '../../../logger';
+  * Only applied for fireworks_ai/ models — other providers are unaffected.
+  */
+ function stripUnsupportedSchemaFields(tools: any[], model: string): any[] {
+-  if (!model.startsWith('fireworks_ai/')) return tools;
++  // Kimi (Moonshot) also rejects JSON-Schema `format` (e.g. whois `format: ipv4`) with HTTP 400.
++  if (!model.startsWith('fireworks_ai/') && !model.toLowerCase().includes('kimi')) return tools;
+   return JSON.parse(JSON.stringify(tools, (key, value) => {
+     if (key === 'format' && typeof value === 'string') return undefined;
+     return value;
+@@ -88,6 +89,7 @@ export class LiteLLMAgentCompletionStrategy
+ 
+         return {
+           message,
++          usage: response.data.usage,
+         };
+       } catch (error: any) {
+         if (error.response?.status === 429 && attempt < MAX_429_RETRIES) {
+diff --git a/services/scoring/score_claims.py b/services/scoring/score_claims.py
+index eddb64e..0e8668b 100644
+--- a/services/scoring/score_claims.py
++++ b/services/scoring/score_claims.py
+@@ -42,10 +42,6 @@ from tenacity import retry, wait_random_exponential, stop_after_attempt
+ from tqdm.asyncio import tqdm as async_tqdm
+ from tqdm import tqdm
+ import matplotlib.pyplot as plt
+-import nest_asyncio
+-
+-# Apply nest_asyncio to allow nested event loops
+-nest_asyncio.apply()
+ 
+ 
+ # =========================================================================
+@@ -345,12 +341,13 @@ class AsyncLiteLLMClient:
+                 headers = {
+                     "Authorization": f"Bearer {api_key}",
+                     "Content-Type": "application/json",
++                    "User-Agent": "MCP-Atlas/1.0",
+                 }
+                 payload = {
+                     "model": self.config.model_name,
+                     "messages": [{"role": "user", "content": prompt}],
+                     "temperature": temperature,
+-                    "response_format": {
++                    "response_format": {"type": "json_object"} if self.config.model_name == "grok-4.7" else {
+                         "type": "json_schema",
+                         "json_schema": {
+                             "name": "claim_evaluation",
+@@ -371,7 +368,12 @@ class AsyncLiteLLMClient:
+                 await asyncio.sleep(self.config.request_delay)
+ 
+                 content = data["choices"][0]["message"]["content"]
+-                return json.loads(content)
++                result = json.loads(content)
++                if not isinstance(result, dict) or not set(response_schema["required"]).issubset(result):
++                    raise ValueError("judge response is missing required fields")
++                if result.get("coverage_outcome") not in response_schema["properties"]["coverage_outcome"]["enum"]:
++                    raise ValueError("judge response has an invalid coverage_outcome")
++                return result
+ 
+             except Exception as e:
+                 self.error_count += 1
+@@ -426,7 +428,8 @@ INSTRUCTIONS:
+ 4. Provide specific justification referencing what was/wasn't covered
+    - When numbers differ slightly, note if they're within acceptable range
+ 5. Provide a confidence level (0.0-1.0) for your assessment
+-Be rigorous but fair in your assessment. Focus on whether the response conveys the same information as the claim, not on exact numerical precision unless precision is critical to the claim's meaning."""
++Be rigorous but fair in your assessment. Focus on whether the response conveys the same information as the claim, not on exact numerical precision unless precision is critical to the claim's meaning.
++Return only one JSON object with keys claim_text, coverage_outcome (fulfilled, partially_fulfilled, or not_fulfilled), justification, and confidence_level (a number). Do not add markdown or prose outside the JSON object."""
+ 
+     async def evaluate_single_claim(self, claim: str, response: str) -> Dict[str, Any]:
+         """Evaluate a single claim against the response"""

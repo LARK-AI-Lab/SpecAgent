@@ -1,0 +1,11 @@
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+outputs/
+dumps/
+results/
+*.private.json
+secrets/
+.DS_Store
+.ruff_cache/

@@ -1,0 +1,20 @@
+[
+  {
+    "role": "weak",
+    "phase": "draft",
+    "duration_seconds": 2.0,
+    "input_tokens": 100,
+    "output_tokens": 40,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 0
+  },
+  {
+    "role": "strong",
+    "phase": "correction",
+    "duration_seconds": 1.0,
+    "input_tokens": 200,
+    "output_tokens": 20,
+    "cached_input_tokens": 0,
+    "reasoning_tokens": 4
+  }
+]

@@ -1,0 +1,929 @@
+{
+ "cancel_rejected_corrector": {
+  "calls": {
+   "correct": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "You are the Strong customer-service agent continuing from a reviewed\ntrajectory. Reassess the conversation and produce exactly one useful next\nstep. You are invoked only when replacement_action was null or failed the\nschema guard; do not re-verify the retained prefix.\n\n1. INPUT AND EVIDENCE\n\n- You receive the original task and tools, the retained dialogue, and\n  review.reason. The retained dialogue is confirmed history plus the\n  accepted prefix, with actions and original observations.\n- Treat the review as a diagnosis to examine, not as new factual evidence.\n  Check its material claims against retained observations; when they\n  conflict, follow the observations.\n\n2. CHOOSE ONE STEP\n\n- Reply when the required work for this customer turn is done, or when\n  the policy requires asking the customer something you do not have.\n- Prefer a missing lookup or a required confirmation question over a\n  speculative mutation.\n- Otherwise issue one tool call targeting the blocking evidence gap or\n  the policy-legal mutation whose preconditions are already met.\n- Follow the supplied schema. Do not invent identifiers.\n\n3. OUTPUT\n\nProduce exactly one assistant step: either one tool call or one reply.\nDo not mention the reviewer, the discarded draft, or this protocol.\n\n\nDomain policy:\nConfirm before cancelling.",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": "{\"review\": {\"reason\": \"customer has not confirmed\"}}",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ],
+   "verify": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 1, \"candidate_reasoning_chars\": 17}}, \"candidate_length\": 1}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    }
+   ],
+   "weak": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    },
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": "Can you confirm you want to cancel order A1?",
+       "reasoning_content": "private reasoning",
+       "role": "assistant",
+       "tool_calls": null
+      },
+      {
+       "content": "Yes, please cancel it.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "executions": [],
+  "stats": {
+   "auto_accepted_chunks": 1,
+   "commit_errors": 0,
+   "committed": 0,
+   "correction_mutation": 0,
+   "correction_read": 0,
+   "correction_reply": 1,
+   "corrections_executed": 0,
+   "corrector_strong": 1,
+   "corrector_weak": 0,
+   "direct_correction_failures": 0,
+   "direct_strong_corrections": 0,
+   "direct_weak_corrections": 0,
+   "discarded": 1,
+   "discarded_at_stop": 0,
+   "full_accept_contract_violation": 0,
+   "horizon_continuations": 0,
+   "paper_boundaries": 0,
+   "paper_read_steps": 0,
+   "paper_reply_observations": 0,
+   "paper_reply_steps": 0,
+   "read_budget_escalations": 0,
+   "read_loop_exhausted": 0,
+   "reads_executed": 0,
+   "reject_other": 1,
+   "rejected_reads": 0,
+   "replacement_guard_failed": 0,
+   "staged": 1,
+   "tool_calls_executed": 0,
+   "transport_retries": 0,
+   "verdict_without_reason": 0,
+   "verifier_format_errors": 0,
+   "verifier_replacements": 0,
+   "weak_retry_attempted": 0,
+   "weak_retry_identical": 0,
+   "weak_retry_rejected": 0,
+   "weak_retry_unverified": 0,
+   "weak_retry_verified": 0
+  },
+  "trajectory": [
+   {
+    "content": "Please cancel order A1.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": "Can you confirm you want to cancel order A1?",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "Yes, please cancel it.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": "Cancelled.",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "###STOP###",
+    "role": "user",
+    "tool_calls": []
+   }
+  ],
+  "unused": {
+   "correct": 0,
+   "verify": 1,
+   "weak": 0
+  }
+ },
+ "cancel_rejected_with_replacement": {
+  "calls": {
+   "correct": [],
+   "verify": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"B2\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 1, \"candidate_reasoning_chars\": 17}}, \"candidate_length\": 1}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    }
+   ],
+   "weak": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    },
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": null,
+       "reasoning_content": "",
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "function": {
+          "arguments": "{\"order_id\": \"A1\"}",
+          "name": "cancel_order"
+         },
+         "id": "call_000000000000",
+         "type": "function"
+        }
+       ]
+      },
+      {
+       "content": "cancelled A1",
+       "role": "tool",
+       "tool_call_id": "call_000000000000"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "executions": [
+   [
+    "cancel_order",
+    "A1"
+   ]
+  ],
+  "stats": {
+   "auto_accepted_chunks": 1,
+   "commit_errors": 0,
+   "committed": 0,
+   "correction_mutation": 0,
+   "correction_read": 0,
+   "correction_reply": 0,
+   "corrections_executed": 0,
+   "corrector_strong": 0,
+   "corrector_weak": 0,
+   "direct_correction_failures": 0,
+   "direct_strong_corrections": 0,
+   "direct_weak_corrections": 0,
+   "discarded": 1,
+   "discarded_at_stop": 0,
+   "full_accept_contract_violation": 0,
+   "horizon_continuations": 0,
+   "paper_boundaries": 0,
+   "paper_read_steps": 0,
+   "paper_reply_observations": 0,
+   "paper_reply_steps": 0,
+   "read_budget_escalations": 0,
+   "read_loop_exhausted": 0,
+   "reads_executed": 0,
+   "reject_other": 1,
+   "rejected_reads": 0,
+   "replacement_guard_failed": 0,
+   "staged": 1,
+   "tool_calls_executed": 1,
+   "transport_retries": 0,
+   "verdict_without_reason": 0,
+   "verifier_format_errors": 0,
+   "verifier_replacements": 1,
+   "weak_retry_attempted": 0,
+   "weak_retry_identical": 0,
+   "weak_retry_rejected": 0,
+   "weak_retry_unverified": 0,
+   "weak_retry_verified": 0
+  },
+  "trajectory": [
+   {
+    "content": "Please cancel order A1.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": null,
+    "role": "assistant",
+    "tool_calls": [
+     [
+      "cancel_order",
+      {
+       "order_id": "A1"
+      }
+     ]
+    ]
+   },
+   {
+    "content": "cancelled A1",
+    "role": "tool",
+    "tool_calls": []
+   },
+   {
+    "content": "Done.",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "###STOP###",
+    "role": "user",
+    "tool_calls": []
+   }
+  ],
+  "unused": {
+   "correct": 0,
+   "verify": 0,
+   "weak": 0
+  }
+ },
+ "malformed_verdict": {
+  "calls": {
+   "correct": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "You are the Strong customer-service agent continuing from a reviewed\ntrajectory. Reassess the conversation and produce exactly one useful next\nstep. You are invoked only when replacement_action was null or failed the\nschema guard; do not re-verify the retained prefix.\n\n1. INPUT AND EVIDENCE\n\n- You receive the original task and tools, the retained dialogue, and\n  review.reason. The retained dialogue is confirmed history plus the\n  accepted prefix, with actions and original observations.\n- Treat the review as a diagnosis to examine, not as new factual evidence.\n  Check its material claims against retained observations; when they\n  conflict, follow the observations.\n\n2. CHOOSE ONE STEP\n\n- Reply when the required work for this customer turn is done, or when\n  the policy requires asking the customer something you do not have.\n- Prefer a missing lookup or a required confirmation question over a\n  speculative mutation.\n- Otherwise issue one tool call targeting the blocking evidence gap or\n  the policy-legal mutation whose preconditions are already met.\n- Follow the supplied schema. Do not invent identifiers.\n\n3. OUTPUT\n\nProduce exactly one assistant step: either one tool call or one reply.\nDo not mention the reviewer, the discarded draft, or this protocol.\n\n\nDomain policy:\nConfirm before cancelling.",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": "{\"review\": {\"reason\": \"the reviewer could not produce a verdict for this step\"}}",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ],
+   "verify": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 1, \"candidate_reasoning_chars\": 17}}, \"candidate_length\": 1}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    },
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n\nYour previous reply was not valid JSON with exactly the three required keys. Reply with one JSON object only.",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 1, \"candidate_reasoning_chars\": 17}}, \"candidate_length\": 1}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    }
+   ],
+   "weak": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "executions": [],
+  "stats": {
+   "auto_accepted_chunks": 0,
+   "commit_errors": 0,
+   "committed": 0,
+   "correction_mutation": 0,
+   "correction_read": 0,
+   "correction_reply": 1,
+   "corrections_executed": 0,
+   "corrector_strong": 1,
+   "corrector_weak": 0,
+   "direct_correction_failures": 0,
+   "direct_strong_corrections": 0,
+   "direct_weak_corrections": 0,
+   "discarded": 1,
+   "discarded_at_stop": 0,
+   "full_accept_contract_violation": 0,
+   "horizon_continuations": 0,
+   "paper_boundaries": 0,
+   "paper_read_steps": 0,
+   "paper_reply_observations": 0,
+   "paper_reply_steps": 0,
+   "read_budget_escalations": 0,
+   "read_loop_exhausted": 0,
+   "reads_executed": 0,
+   "rejected_reads": 0,
+   "replacement_guard_failed": 0,
+   "staged": 1,
+   "tool_calls_executed": 0,
+   "transport_retries": 0,
+   "verdict_without_reason": 0,
+   "verifier_format_errors": 1,
+   "verifier_replacements": 0,
+   "weak_retry_attempted": 0,
+   "weak_retry_identical": 0,
+   "weak_retry_rejected": 0,
+   "weak_retry_unverified": 0,
+   "weak_retry_verified": 0
+  },
+  "trajectory": [
+   {
+    "content": "Please cancel order A1.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": "Let me check first.",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "###STOP###",
+    "role": "user",
+    "tool_calls": []
+   }
+  ],
+  "unused": {
+   "correct": 0,
+   "verify": 0,
+   "weak": 1
+  }
+ },
+ "parallel_read_and_cancel_partial": {
+  "calls": {
+   "correct": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "You are the Strong customer-service agent continuing from a reviewed\ntrajectory. Reassess the conversation and produce exactly one useful next\nstep. You are invoked only when replacement_action was null or failed the\nschema guard; do not re-verify the retained prefix.\n\n1. INPUT AND EVIDENCE\n\n- You receive the original task and tools, the retained dialogue, and\n  review.reason. The retained dialogue is confirmed history plus the\n  accepted prefix, with actions and original observations.\n- Treat the review as a diagnosis to examine, not as new factual evidence.\n  Check its material claims against retained observations; when they\n  conflict, follow the observations.\n\n2. CHOOSE ONE STEP\n\n- Reply when the required work for this customer turn is done, or when\n  the policy requires asking the customer something you do not have.\n- Prefer a missing lookup or a required confirmation question over a\n  speculative mutation.\n- Otherwise issue one tool call targeting the blocking evidence gap or\n  the policy-legal mutation whose preconditions are already met.\n- Follow the supplied schema. Do not invent identifiers.\n\n3. OUTPUT\n\nProduce exactly one assistant step: either one tool call or one reply.\nDo not mention the reviewer, the discarded draft, or this protocol.\n\n\nDomain policy:\nConfirm before cancelling.",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": null,
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "function": {
+          "arguments": "{\"order_id\": \"A1\"}",
+          "name": "get_order_details"
+         },
+         "id": "w1",
+         "type": "function"
+        }
+       ]
+      },
+      {
+       "content": "order A1: delivered",
+       "role": "tool",
+       "tool_call_id": "w1"
+      },
+      {
+       "content": "{\"review\": {\"reason\": \"confirm first\"}}",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ],
+   "verify": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}, \"get_order_details\": {\"type\": \"function\", \"function\": {\"name\": \"get_order_details\", \"description\": \"Look up an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"get_order_details\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": \"order A1: delivered\", \"terminal\": false}, {\"index\": 2, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 1, \"candidate_reasoning_chars\": 17}}, \"candidate_length\": 2}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    }
+   ],
+   "weak": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "executions": [
+   [
+    "get_order_details",
+    "A1"
+   ]
+  ],
+  "stats": {
+   "auto_accepted_chunks": 0,
+   "commit_errors": 0,
+   "committed": 0,
+   "correction_mutation": 0,
+   "correction_read": 0,
+   "correction_reply": 1,
+   "corrections_executed": 0,
+   "corrector_strong": 1,
+   "corrector_weak": 0,
+   "direct_correction_failures": 0,
+   "direct_strong_corrections": 0,
+   "direct_weak_corrections": 0,
+   "discarded": 1,
+   "discarded_at_stop": 0,
+   "full_accept_contract_violation": 0,
+   "horizon_continuations": 0,
+   "paper_boundaries": 0,
+   "paper_read_steps": 0,
+   "paper_reply_observations": 0,
+   "paper_reply_steps": 0,
+   "read_budget_escalations": 0,
+   "read_loop_exhausted": 0,
+   "reads_executed": 1,
+   "reject_other": 1,
+   "rejected_reads": 0,
+   "replacement_guard_failed": 0,
+   "staged": 1,
+   "tool_calls_executed": 1,
+   "transport_retries": 0,
+   "verdict_without_reason": 0,
+   "verifier_format_errors": 0,
+   "verifier_replacements": 0,
+   "weak_retry_attempted": 0,
+   "weak_retry_identical": 0,
+   "weak_retry_rejected": 0,
+   "weak_retry_unverified": 0,
+   "weak_retry_verified": 0
+  },
+  "trajectory": [
+   {
+    "content": "Please cancel order A1.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": null,
+    "role": "assistant",
+    "tool_calls": [
+     [
+      "get_order_details",
+      {
+       "order_id": "A1"
+      }
+     ]
+    ]
+   },
+   {
+    "content": "order A1: delivered",
+    "role": "tool",
+    "tool_calls": []
+   },
+   {
+    "content": "Please confirm the cancellation.",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "###STOP###",
+    "role": "user",
+    "tool_calls": []
+   }
+  ],
+  "unused": {
+   "correct": 0,
+   "verify": 0,
+   "weak": 1
+  }
+ },
+ "read_then_accepted_cancel": {
+  "calls": {
+   "correct": [],
+   "verify": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "temperature": 0.0,
+      "thinking": false
+     },
+     "messages": [
+      {
+       "content": "You are the Strong trajectory reviewer for a Weak-led customer-service agent\nin the \"retail\" domain. Assess whether the draft is a justified continuation,\nretain its longest valid prefix, and redirect it when necessary.\n\n1. INPUT AND EVIDENCE\n\n- Input: task, confirmed_history, proposed_trajectory, candidate_length K,\n  invoked_tool_contracts, and the domain policy below.\n- Candidate steps are indexed 1..K. pending=true means the step has not\n  happened (a staged mutation or an unsent reply). A step without pending\n  has already executed; its observation is real.\n- Ground judgments in original observations. Assistant hypotheses and\n  review notes are not factual evidence.\n\nDomain policy:\nConfirm before cancelling.\n\n2. REVIEW THE DIRECTION\n\nEvaluate the chunk against the customer's request, the policy, and visible\nhistory. Notice ignored contradictions, mutations whose preconditions are\nunmet, replies that claim work that was not done, and unproductive repeats.\n\nCustomer-service replies:\n- Asking for a user id, reservation id, date, or name that is not yet in\n  the task, customer messages, or tool observations is a justified\n  continuation. Do not reject it for failing to finish the request.\n- A reply that promises a cancellation, refund, booking change, waiver,\n  or other state change is a commit. Reject it unless that mutation is\n  already in confirmed_history or this chunk with a successful observation.\n- When the policy requires explicit customer confirmation before acting,\n  a draft that mutates without that answer is unjustified. \"The customer\n  implied yes\" is not confirmation.\n\nPolicy:\n- A mutation or a denial is justified only by a sentence in the domain\n  policy above. If you cannot point to that sentence, do not invent a rule.\n- If two policy-legal outcomes remain, do not reject the draft for picking\n  one unless the conversation plus policy uniquely selects the other.\n\nExecuted reads (pending=false lookups):\n- The observation is already real. Rejecting the read cannot undo it; it\n  only discards later steps. Do not zero- or partial-accept a reads-only\n  prefix because a later mutation would be better, because the agent is\n  \"still searching\", or because the matching reservation has not turned\n  up yet. Searching the customer's existing reservations for the one they\n  described is justified.\n- Reject an executed read only when the tool or required arguments are\n  invalid: unknown tool, missing required argument, or an identifier that\n  never appeared in the task, customer messages, or prior observations.\n\nPending mutations (pending=true tool calls):\n- Judge the call as if it will run. Wrong user id, reservation id, payment\n  id, amount, cabin, or date is a reject even if a later undo exists.\n\n3. RETAIN THE LONGEST VALID PREFIX\n\nSet accepted_steps to the largest j for which steps 1..j form a justified\ncontinuation, stopping before the first unjustified action.\n- Judge each action using evidence available before it.\n- j applies only to the candidate chunk. j=0 discards that chunk, not\n  confirmed_history.\n- Stop at unknown tools, invalid required arguments, policy-illegal\n  mutations, or a reply that ends the turn with required work missing.\n\n4. EXPLAIN THE REJECTION WHEN j < K\n\nWrite reason as a concise, evidence-based decision brief: what is wrong,\nwhy continuation stops at this prefix, and what the next step should\nestablish. The next actor receives confirmed_history, steps 1..j, and\nreason, without the discarded suffix. Do not present facts found only in\nthe discarded suffix as retained evidence.\nIf you also emit replacement_action, reason only diagnoses the discarded\nsuffix; it must not assign extra work to a second Strong actor.\n\n5. PROPOSE ONE TOOL ACTION OR HAND OFF\n\n- If you can specify a useful next tool call from the retained context,\n  you MUST return it as replacement_action: {\"tool\": \"...\", \"arguments\": {...}}.\n  Returning null spends a second Strong call. Use null only when the next\n  step is a customer reply, or you cannot fill schema-valid arguments from\n  the retained prefix.\n- This field is tool-only: one call, a supplied tool, complete schema-valid\n  arguments. Mutating tools are allowed when the policy's preconditions\n  are already satisfied by the retained prefix.\n- Do not return null \"to be safe\" when a lookup tool already has its\n  arguments in the retained observations.\n\n6. OUTPUT\n\nReturn exactly one JSON object with exactly these three keys:\n{\"reason\": <string or null>, \"accepted_steps\": <integer 0..K>,\n \"replacement_action\": <one tool action or null>}\n- Full acceptance (j == K): reason and replacement_action must both be null.\n- Partial acceptance or rejection (j < K): reason must contain the diagnosis;\n  replacement_action follows section 5.\n- Do not emit rejection_code, corrector, or any other key.\n",
+       "role": "system"
+      },
+      {
+       "content": "{\"confirmed_history\": [], \"task\": {\"task_id\": \"fixture-0\", \"instruction\": \"Please cancel order A1.\", \"system_constraints\": []}, \"anchors\": {\"task_id\": \"fixture-0\"}, \"invoked_tool_contracts\": {\"cancel_order\": {\"type\": \"function\", \"function\": {\"name\": \"cancel_order\", \"description\": \"Cancel an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}, \"get_order_details\": {\"type\": \"function\", \"function\": {\"name\": \"get_order_details\", \"description\": \"Look up an order.\", \"parameters\": {\"properties\": {\"order_id\": {\"description\": \"Order identifier.\", \"title\": \"Order Id\", \"type\": \"string\"}}, \"required\": [\"order_id\"], \"title\": \"parameters\", \"type\": \"object\"}}}}, \"proposed_trajectory\": [{\"index\": 1, \"actor\": \"weak\", \"action\": {\"tool\": \"get_order_details\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": \"order A1: delivered\", \"terminal\": false}, {\"index\": 2, \"actor\": \"weak\", \"action\": {\"tool\": \"cancel_order\", \"arguments\": {\"order_id\": \"A1\"}}, \"observation\": null, \"terminal\": false, \"pending\": true}], \"request_evidence_metadata\": {\"pruned_context\": {\"reasoning_steps\": 0, \"reasoning_chars\": 0, \"summaries\": 0, \"summary_chars\": 0, \"candidate_reasoning_steps\": 2, \"candidate_reasoning_chars\": 34}}, \"candidate_length\": 2}",
+       "role": "user"
+      }
+     ],
+     "tools": []
+    }
+   ],
+   "weak": [
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    },
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": null,
+       "reasoning_content": "private reasoning",
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "function": {
+          "arguments": "{\"order_id\": \"A1\"}",
+          "name": "get_order_details"
+         },
+         "id": "w1",
+         "type": "function"
+        }
+       ]
+      },
+      {
+       "content": "order A1: delivered",
+       "role": "tool",
+       "tool_call_id": "w1"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    },
+    {
+     "kwargs": {
+      "max_output_tokens": null,
+      "thinking": null
+     },
+     "messages": [
+      {
+       "content": "<instructions>\nYou are a customer service agent that helps the user according to the <policy> provided below.\nIn each turn you can either:\n- Send a message to the user.\n- Make a tool call.\nYou cannot do both at the same time.\n\nTry to be helpful and always follow the policy. Always make sure you generate valid JSON only.\n</instructions>\n<policy>\nConfirm before cancelling.\n</policy>",
+       "role": "system"
+      },
+      {
+       "content": "Please cancel order A1.",
+       "role": "user"
+      },
+      {
+       "content": null,
+       "reasoning_content": "private reasoning",
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "function": {
+          "arguments": "{\"order_id\": \"A1\"}",
+          "name": "get_order_details"
+         },
+         "id": "w1",
+         "type": "function"
+        }
+       ]
+      },
+      {
+       "content": "order A1: delivered",
+       "role": "tool",
+       "tool_call_id": "w1"
+      },
+      {
+       "content": null,
+       "reasoning_content": "private reasoning",
+       "role": "assistant",
+       "tool_calls": [
+        {
+         "function": {
+          "arguments": "{\"order_id\": \"A1\"}",
+          "name": "cancel_order"
+         },
+         "id": "w2",
+         "type": "function"
+        }
+       ]
+      },
+      {
+       "content": "cancelled A1",
+       "role": "tool",
+       "tool_call_id": "w2"
+      }
+     ],
+     "tools": [
+      "get_order_details",
+      "cancel_order"
+     ]
+    }
+   ]
+  },
+  "error": null,
+  "executions": [
+   [
+    "get_order_details",
+    "A1"
+   ],
+   [
+    "cancel_order",
+    "A1"
+   ]
+  ],
+  "stats": {
+   "auto_accepted_chunks": 1,
+   "commit_errors": 0,
+   "committed": 1,
+   "correction_mutation": 0,
+   "correction_read": 0,
+   "correction_reply": 0,
+   "corrections_executed": 0,
+   "corrector_strong": 0,
+   "corrector_weak": 0,
+   "direct_correction_failures": 0,
+   "direct_strong_corrections": 0,
+   "direct_weak_corrections": 0,
+   "discarded": 0,
+   "discarded_at_stop": 0,
+   "full_accept_contract_violation": 0,
+   "horizon_continuations": 0,
+   "paper_boundaries": 0,
+   "paper_read_steps": 0,
+   "paper_reply_observations": 0,
+   "paper_reply_steps": 0,
+   "read_budget_escalations": 0,
+   "read_loop_exhausted": 0,
+   "reads_executed": 1,
+   "rejected_reads": 0,
+   "replacement_guard_failed": 0,
+   "staged": 1,
+   "tool_calls_executed": 2,
+   "transport_retries": 0,
+   "verdict_without_reason": 0,
+   "verifier_format_errors": 0,
+   "verifier_replacements": 0,
+   "weak_retry_attempted": 0,
+   "weak_retry_identical": 0,
+   "weak_retry_rejected": 0,
+   "weak_retry_unverified": 0,
+   "weak_retry_verified": 0
+  },
+  "trajectory": [
+   {
+    "content": "Please cancel order A1.",
+    "role": "user",
+    "tool_calls": []
+   },
+   {
+    "content": null,
+    "role": "assistant",
+    "tool_calls": [
+     [
+      "get_order_details",
+      {
+       "order_id": "A1"
+      }
+     ]
+    ]
+   },
+   {
+    "content": "order A1: delivered",
+    "role": "tool",
+    "tool_calls": []
+   },
+   {
+    "content": null,
+    "role": "assistant",
+    "tool_calls": [
+     [
+      "cancel_order",
+      {
+       "order_id": "A1"
+      }
+     ]
+    ]
+   },
+   {
+    "content": "cancelled A1",
+    "role": "tool",
+    "tool_calls": []
+   },
+   {
+    "content": "Order A1 is cancelled.",
+    "role": "assistant",
+    "tool_calls": []
+   },
+   {
+    "content": "###STOP###",
+    "role": "user",
+    "tool_calls": []
+   }
+  ],
+  "unused": {
+   "correct": 0,
+   "verify": 0,
+   "weak": 0
+  }
+ }
+}

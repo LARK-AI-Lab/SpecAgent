@@ -1,0 +1,45 @@
+{
+ "mcp_atlas": {
+  "horizon": 6,
+  "verifier_max_tokens": 500,
+  "weak_extra_body": {
+   "chat_template_kwargs": {
+    "enable_thinking": true
+   }
+  },
+  "verifier_extra_body": {
+   "thinking": {
+    "type": "disabled"
+   }
+  },
+  "task_semantics": "qa",
+  "verifier_include_reasoning": false,
+  "strict_answer_review": true,
+  "verifier_all_tool_contracts": true,
+  "readonly_tools": [
+   "cli-mcp-server_run_command"
+  ],
+  "strong_takeover_after_tool_results": 30,
+  "verifier_answer_checks": true,
+  "corrector_max_tokens": 4096,
+  "verifier_append_only": true,
+  "verifier_recent_observation_chars": 12000,
+  "corrector_reask_invalid_call": true,
+  "weak_history_reasoning": true,
+  "weak_overflow_resample": true,
+  "strong_overflow_drop": true
+ },
+ "automationbench": {
+  "horizon": 8,
+  "verifier_max_tokens": 4096,
+  "correction_history_reasoning": false,
+  "verifier_prompt_suffix": "AutomationBench policy: when rejecting a tool-call step whose correct repair is a grounded call of the same tool, emit that repaired call as replacement_action. Reserve replacement_action=null for repairs that need a new observation, repairs that are themselves a reply, or arguments that cannot be grounded in the evidence. Independently, reject a tool-call step that repeats a call already committed in confirmed_history with materially identical arguments when the earlier observation already provided the information it seeks; the correct next step is to act on that information or to reply, not to query again. Before accepting a reply that claims the task is done, check each deliverable the task requires against confirmed_history: if any required artifact, update, or notification has no executed step or observation supporting it, reject the reply (replacement_action=null) so correction can continue the missing work.",
+  "weak_review_hint": true,
+  "repeat_call_guard": true,
+  "fuse_correction_boundaries": [
+   "mutation"
+  ],
+  "verifier_history_reasoning": false,
+  "strict_action_validation": false
+ }
+}

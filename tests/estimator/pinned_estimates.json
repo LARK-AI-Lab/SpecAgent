@@ -1,0 +1,6498 @@
+{
+ "DeepSeek-V4-Flash-0731|1|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25494159360
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "flops": [
+   25494159360,
+   0,
+   0,
+   25494159360
+  ],
+  "hbm": [
+   14063341568,
+   1431040,
+   14061932544,
+   0,
+   0,
+   1409024
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25494159360
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 25494159360,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 14063341568,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|1|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 26553221120
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "flops": [
+   25494159360,
+   0,
+   1059061760,
+   26553221120
+  ],
+  "hbm": [
+   14063341568,
+   1431040,
+   14061932544,
+   0,
+   0,
+   1409024
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 26553221120
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14063341568
+  },
+  "unknown_cache_flops": {
+   "lower": 26553221120,
+   "status": "incomplete",
+   "upper": 26558857216,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14063341568,
+   "status": "incomplete",
+   "upper": 14063385600,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|1|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8170067116032
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4219821341056
+  },
+  "flops": [
+   25494159360,
+   7826854428672,
+   317718528000,
+   8170067116032
+  ],
+  "hbm": [
+   4219821341056,
+   430340560,
+   4218579763200,
+   818870656,
+   0,
+   422707200
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4219821341056
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8170067116032
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4219821341056
+  },
+  "unknown_cache_flops": {
+   "lower": 8170067116032,
+   "status": "incomplete",
+   "upper": 8171020386304,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4219821341056,
+   "status": "incomplete",
+   "upper": 4219825187584,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|1|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 114069331116032
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 56286830214656
+  },
+  "flops": [
+   25494159360,
+   109807589916672,
+   4236247040000,
+   114069331116032
+  ],
+  "hbm": [
+   56286830214656,
+   5737916560,
+   56247730176000,
+   33463942656,
+   0,
+   5636096000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 56286830214656
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 114069331116032
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 56286830214656
+  },
+  "unknown_cache_flops": {
+   "lower": 114069331116032,
+   "status": "incomplete",
+   "upper": 114071881515008,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56286830214656,
+   "status": "incomplete",
+   "upper": 56286841543168,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 13157469274112
+  },
+  "enriched_hbm_read": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "flops": [
+   13157469274112,
+   0,
+   0,
+   13157469274112
+  ],
+  "hbm": [
+   14768488448,
+   717230720,
+   14063976448,
+   0,
+   0,
+   704512000
+  ],
+  "hbm_read_interval": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 13157469274112
+  },
+  "reuse_hbm_read": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 13157469274112,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|0|250": {
+  "enriched_flops": {
+   "lower": 6626472673280,
+   "status": "incomplete",
+   "upper": 13157469274112,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "flops": [
+   6626472673280,
+   0,
+   0,
+   6626472673280
+  ],
+  "hbm": [
+   14415208448,
+   358603520,
+   14062952448,
+   0,
+   0,
+   352256000
+  ],
+  "hbm_read_interval": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 149681512448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6626472673280
+  },
+  "reuse_hbm_read": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 149681512448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 13157469274112,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 13158528335872
+  },
+  "enriched_hbm_read": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "flops": [
+   13157469274112,
+   0,
+   1059061760,
+   13158528335872
+  ],
+  "hbm": [
+   14768488448,
+   717230720,
+   14063976448,
+   0,
+   0,
+   704512000
+  ],
+  "hbm_read_interval": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 13158528335872
+  },
+  "reuse_hbm_read": {
+   "lower": 14768488448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 27663941632,
+   "status": "incomplete",
+   "upper": 13158528335872,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14067870336,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|1|250": {
+  "enriched_flops": {
+   "lower": 6627531735040,
+   "status": "incomplete",
+   "upper": 13158528335872,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  },
+  "flops": [
+   6626472673280,
+   0,
+   1059061760,
+   6627531735040
+  ],
+  "hbm": [
+   14415208448,
+   358603520,
+   14062952448,
+   0,
+   0,
+   352256000
+  ],
+  "hbm_read_interval": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 149681512448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6627531735040
+  },
+  "reuse_hbm_read": {
+   "lower": 14415208448,
+   "status": "incomplete",
+   "upper": 149681512448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 27663941632,
+   "status": "incomplete",
+   "upper": 13158528335872,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14067870336,
+   "status": "incomplete",
+   "upper": 150034792448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 21465677168640
+  },
+  "enriched_hbm_read": {
+   "lower": 4221215818112,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  },
+  "flops": [
+   13157469274112,
+   7990489366528,
+   317718528000,
+   21465677168640
+  ],
+  "hbm": [
+   4221215818112,
+   1146140240,
+   4218581807104,
+   1508200832,
+   0,
+   1125810176
+  ],
+  "hbm_read_interval": {
+   "lower": 4221215818112,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 21465677168640
+  },
+  "reuse_hbm_read": {
+   "lower": 4221215818112,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 8335052881920,
+   "status": "incomplete",
+   "upper": 21465677168640,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4220516238720,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|300|250": {
+  "enriched_flops": {
+   "lower": 14934680567808,
+   "status": "incomplete",
+   "upper": 21465677168640,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 4220862538112,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  },
+  "flops": [
+   6626472673280,
+   7990489366528,
+   317718528000,
+   14934680567808
+  ],
+  "hbm": [
+   4220862538112,
+   787513040,
+   4218580783104,
+   1508200832,
+   0,
+   773554176
+  ],
+  "hbm_read_interval": {
+   "lower": 4220862538112,
+   "status": "incomplete",
+   "upper": 4356128842112,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 14934680567808
+  },
+  "reuse_hbm_read": {
+   "lower": 4220862538112,
+   "status": "incomplete",
+   "upper": 4356128842112,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 8335052881920,
+   "status": "incomplete",
+   "upper": 21465677168640,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4220516238720,
+   "status": "incomplete",
+   "upper": 4356482122112,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 128076454690816
+  },
+  "enriched_hbm_read": {
+   "lower": 56291624398208,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  },
+  "flops": [
+   13157469274112,
+   110682738376704,
+   4236247040000,
+   128076454690816
+  ],
+  "hbm": [
+   56291624398208,
+   6453716240,
+   56247732219904,
+   37552979328,
+   0,
+   6339198976
+  ],
+  "hbm_read_interval": {
+   "lower": 56291624398208,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 128076454690816
+  },
+  "reuse_hbm_read": {
+   "lower": 56291624398208,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 114947083468800,
+   "status": "incomplete",
+   "upper": 128076454690816,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56290930956800,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|500|4000|250": {
+  "enriched_flops": {
+   "lower": 121545458089984,
+   "status": "incomplete",
+   "upper": 128076454690816,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 56291271118208,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  },
+  "flops": [
+   6626472673280,
+   110682738376704,
+   4236247040000,
+   121545458089984
+  ],
+  "hbm": [
+   56291271118208,
+   6095089040,
+   56247731195904,
+   37552979328,
+   0,
+   5986942976
+  ],
+  "hbm_read_interval": {
+   "lower": 56291271118208,
+   "status": "incomplete",
+   "upper": 56426537422208,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 121545458089984
+  },
+  "reuse_hbm_read": {
+   "lower": 56291271118208,
+   "status": "incomplete",
+   "upper": 56426537422208,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 114947083468800,
+   "status": "incomplete",
+   "upper": 128076454690816,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56290930956800,
+   "status": "incomplete",
+   "upper": 56426890702208,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1847273707405312
+  },
+  "enriched_hbm_read": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "flops": [
+   1847273707405312,
+   0,
+   0,
+   1847273707405312
+  ],
+  "hbm": [
+   98849128448,
+   86068792320,
+   14307688448,
+   0,
+   0,
+   84541440000
+  ],
+  "hbm_read_interval": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1847273707405312
+  },
+  "reuse_hbm_read": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1847273707405312,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|0|30000": {
+  "enriched_flops": {
+   "lower": 972305194352640,
+   "status": "incomplete",
+   "upper": 1847273707405312,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "flops": [
+   972305194352640,
+   0,
+   0,
+   972305194352640
+  ],
+  "hbm": [
+   56455528448,
+   43034396160,
+   14184808448,
+   0,
+   0,
+   42270720000
+  ],
+  "hbm_read_interval": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 191721832448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 972305194352640
+  },
+  "reuse_hbm_read": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 191721832448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1847273707405312,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1847274766467072
+  },
+  "enriched_hbm_read": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "flops": [
+   1847273707405312,
+   0,
+   1059061760,
+   1847274766467072
+  ],
+  "hbm": [
+   98849128448,
+   86068792320,
+   14307688448,
+   0,
+   0,
+   84541440000
+  ],
+  "hbm_read_interval": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1847274766467072
+  },
+  "reuse_hbm_read": {
+   "lower": 98849128448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 35066085376,
+   "status": "incomplete",
+   "upper": 1847274766467072,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14116776960,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|1|30000": {
+  "enriched_flops": {
+   "lower": 972306253414400,
+   "status": "incomplete",
+   "upper": 1847274766467072,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  },
+  "flops": [
+   972305194352640,
+   0,
+   1059061760,
+   972306253414400
+  ],
+  "hbm": [
+   56455528448,
+   43034396160,
+   14184808448,
+   0,
+   0,
+   42270720000
+  ],
+  "hbm_read_interval": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 191721832448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 972306253414400
+  },
+  "reuse_hbm_read": {
+   "lower": 56455528448,
+   "status": "incomplete",
+   "upper": 191721832448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 35066085376,
+   "status": "incomplete",
+   "upper": 1847274766467072,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14116776960,
+   "status": "incomplete",
+   "upper": 234115432448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1857764446109696
+  },
+  "enriched_hbm_read": {
+   "lower": 4319799577088,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  },
+  "flops": [
+   1847273707405312,
+   10173020176384,
+   317718528000,
+   1857764446109696
+  ],
+  "hbm": [
+   4319799577088,
+   86497701840,
+   4218825519104,
+   16011319808,
+   0,
+   84962738176
+  ],
+  "hbm_read_interval": {
+   "lower": 4319799577088,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1857764446109696
+  },
+  "reuse_hbm_read": {
+   "lower": 4319799577088,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 10524779397120,
+   "status": "incomplete",
+   "upper": 1857764446109696,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4235067457920,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|300|30000": {
+  "enriched_flops": {
+   "lower": 982795933057024,
+   "status": "incomplete",
+   "upper": 1857764446109696,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 4277405977088,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  },
+  "flops": [
+   972305194352640,
+   10173020176384,
+   317718528000,
+   982795933057024
+  ],
+  "hbm": [
+   4277405977088,
+   43463305680,
+   4218702639104,
+   16011319808,
+   0,
+   42692018176
+  ],
+  "hbm_read_interval": {
+   "lower": 4277405977088,
+   "status": "incomplete",
+   "upper": 4412672281088,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 982795933057024
+  },
+  "reuse_hbm_read": {
+   "lower": 4277405977088,
+   "status": "incomplete",
+   "upper": 4412672281088,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 10524779397120,
+   "status": "incomplete",
+   "upper": 1857764446109696,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4235067457920,
+   "status": "incomplete",
+   "upper": 4455065881088,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1988357911740416
+  },
+  "enriched_hbm_read": {
+   "lower": 56557860932608,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  },
+  "flops": [
+   1847273707405312,
+   136847957295104,
+   4236247040000,
+   1988357911740416
+  ],
+  "hbm": [
+   56557860932608,
+   91805277840,
+   56247975931904,
+   219708873728,
+   0,
+   90176126976
+  ],
+  "hbm_read_interval": {
+   "lower": 56557860932608,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1988357911740416
+  },
+  "reuse_hbm_read": {
+   "lower": 56557860932608,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 141118639308800,
+   "status": "incomplete",
+   "upper": 1988357911740416,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56473131596800,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|60000|4000|30000": {
+  "enriched_flops": {
+   "lower": 1113389398687744,
+   "status": "incomplete",
+   "upper": 1988357911740416,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 56515467332608,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  },
+  "flops": [
+   972305194352640,
+   136847957295104,
+   4236247040000,
+   1113389398687744
+  ],
+  "hbm": [
+   56515467332608,
+   48770881680,
+   56247853051904,
+   219708873728,
+   0,
+   47905406976
+  ],
+  "hbm_read_interval": {
+   "lower": 56515467332608,
+   "status": "incomplete",
+   "upper": 56650733636608,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1113389398687744
+  },
+  "reuse_hbm_read": {
+   "lower": 56515467332608,
+   "status": "incomplete",
+   "upper": 56650733636608,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 141118639308800,
+   "status": "incomplete",
+   "upper": 1988357911740416,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56473131596800,
+   "status": "incomplete",
+   "upper": 56693127236608,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 222860411666432
+  },
+  "enriched_hbm_read": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "flops": [
+   222860411666432,
+   0,
+   0,
+   222860411666432
+  ],
+  "hbm": [
+   25366888448,
+   11475834880,
+   14094696448,
+   0,
+   0,
+   11272192000
+  ],
+  "hbm_read_interval": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 222860411666432
+  },
+  "reuse_hbm_read": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 222860411666432,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|0|4000": {
+  "enriched_flops": {
+   "lower": 113027327590400,
+   "status": "incomplete",
+   "upper": 222860411666432,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "flops": [
+   113027327590400,
+   0,
+   0,
+   113027327590400
+  ],
+  "hbm": [
+   19714408448,
+   5737917440,
+   14078312448,
+   0,
+   0,
+   5636096000
+  ],
+  "hbm_read_interval": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 154980712448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 113027327590400
+  },
+  "reuse_hbm_read": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 154980712448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 222860411666432,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 222861470728192
+  },
+  "enriched_hbm_read": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "flops": [
+   222860411666432,
+   0,
+   1059061760,
+   222861470728192
+  ],
+  "hbm": [
+   25366888448,
+   11475834880,
+   14094696448,
+   0,
+   0,
+   11272192000
+  ],
+  "hbm_read_interval": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 222861470728192
+  },
+  "reuse_hbm_read": {
+   "lower": 25366888448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 29528948736,
+   "status": "incomplete",
+   "upper": 222861470728192,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14077675520,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|1|4000": {
+  "enriched_flops": {
+   "lower": 113028386652160,
+   "status": "incomplete",
+   "upper": 222861470728192,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  },
+  "flops": [
+   113027327590400,
+   0,
+   1059061760,
+   113028386652160
+  ],
+  "hbm": [
+   19714408448,
+   5737917440,
+   14078312448,
+   0,
+   0,
+   5636096000
+  ],
+  "hbm_read_interval": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 154980712448,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 113028386652160
+  },
+  "reuse_hbm_read": {
+   "lower": 19714408448,
+   "status": "incomplete",
+   "upper": 154980712448,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 29528948736,
+   "status": "incomplete",
+   "upper": 222861470728192,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 14077675520,
+   "status": "incomplete",
+   "upper": 160633192448,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 231695347286016
+  },
+  "enriched_hbm_read": {
+   "lower": 4234625228288,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  },
+  "flops": [
+   222860411666432,
+   8517217091584,
+   317718528000,
+   231695347286016
+  ],
+  "hbm": [
+   4234625228288,
+   11904744400,
+   4218612527104,
+   4319211008,
+   0,
+   11693490176
+  ],
+  "hbm_read_interval": {
+   "lower": 4234625228288,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 231695347286016
+  },
+  "reuse_hbm_read": {
+   "lower": 4234625228288,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 8863436554240,
+   "status": "incomplete",
+   "upper": 231695347286016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4223336237440,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|300|4000": {
+  "enriched_flops": {
+   "lower": 121862263209984,
+   "status": "incomplete",
+   "upper": 231695347286016,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 4228972748288,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  },
+  "flops": [
+   113027327590400,
+   8517217091584,
+   317718528000,
+   121862263209984
+  ],
+  "hbm": [
+   4228972748288,
+   6166826960,
+   4218596143104,
+   4319211008,
+   0,
+   6057394176
+  ],
+  "hbm_read_interval": {
+   "lower": 4228972748288,
+   "status": "incomplete",
+   "upper": 4364239052288,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 121862263209984
+  },
+  "reuse_hbm_read": {
+   "lower": 4228972748288,
+   "status": "incomplete",
+   "upper": 4364239052288,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 8863436554240,
+   "status": "incomplete",
+   "upper": 231695347286016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 4223336237440,
+   "status": "incomplete",
+   "upper": 4369891532288,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 341799006109696
+  },
+  "enriched_hbm_read": {
+   "lower": 56328001875968,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  },
+  "flops": [
+   222860411666432,
+   114702347403264,
+   4236247040000,
+   341799006109696
+  ],
+  "hbm": [
+   56328001875968,
+   17212320400,
+   56247762939904,
+   63332057088,
+   0,
+   16906878976
+  ],
+  "hbm_read_interval": {
+   "lower": 56328001875968,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 341799006109696
+  },
+  "reuse_hbm_read": {
+   "lower": 56328001875968,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 118967489658880,
+   "status": "incomplete",
+   "upper": 341799006109696,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56316715668480,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  }
+ },
+ "DeepSeek-V4-Flash-0731|8000|4000|4000": {
+  "enriched_flops": {
+   "lower": 231965922033664,
+   "status": "incomplete",
+   "upper": 341799006109696,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 56322349395968,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  },
+  "flops": [
+   113027327590400,
+   114702347403264,
+   4236247040000,
+   231965922033664
+  ],
+  "hbm": [
+   56322349395968,
+   11474402960,
+   56247746555904,
+   63332057088,
+   0,
+   11270782976
+  ],
+  "hbm_read_interval": {
+   "lower": 56322349395968,
+   "status": "incomplete",
+   "upper": 56457615699968,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 231965922033664
+  },
+  "reuse_hbm_read": {
+   "lower": 56322349395968,
+   "status": "incomplete",
+   "upper": 56457615699968,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 118967489658880,
+   "status": "incomplete",
+   "upper": 341799006109696,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 56316715668480,
+   "status": "incomplete",
+   "upper": 56463268179968,
+   "value": null
+  }
+ },
+ "GLM-5|1|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 79766470656
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "flops": [
+   79766470656,
+   0,
+   0,
+   79766470656
+  ],
+  "hbm": [
+   81664856064,
+   1068288,
+   81663897600,
+   0,
+   0,
+   958464
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 79766470656
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 79766470656,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 81664856064,
+   "value": null
+  }
+ },
+ "GLM-5|1|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81669636096
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "flops": [
+   79766470656,
+   0,
+   1903165440,
+   81669636096
+  ],
+  "hbm": [
+   81664856064,
+   1068288,
+   81663897600,
+   0,
+   0,
+   958464
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81669636096
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 81664856064
+  },
+  "unknown_cache_flops": {
+   "lower": 81669636096,
+   "status": "incomplete",
+   "upper": 81686888448,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 81664856064,
+   "status": "incomplete",
+   "upper": 81665075712,
+   "value": null
+  }
+ },
+ "GLM-5|1|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25018455638016
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 24504415262976
+  },
+  "flops": [
+   79766470656,
+   24367739535360,
+   570949632000,
+   25018455638016
+  ],
+  "hbm": [
+   24504415262976,
+   320486400,
+   24499169280000,
+   4958443776,
+   0,
+   287539200
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 24504415262976
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25018455638016
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 24504415262976
+  },
+  "unknown_cache_flops": {
+   "lower": 25018455638016,
+   "status": "incomplete",
+   "upper": 25021911859200,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24504415262976,
+   "status": "incomplete",
+   "upper": 24504448320000,
+   "value": null
+  }
+ },
+ "GLM-5|1|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 397985591869440
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 327366958756608
+  },
+  "flops": [
+   79766470656,
+   390293163638784,
+   7612661760000,
+   397985591869440
+  ],
+  "hbm": [
+   327366958756608,
+   4273152000,
+   326655590400000,
+   707534500608,
+   0,
+   3833856000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 327366958756608
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 397985591869440
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 327366958756608
+  },
+  "unknown_cache_flops": {
+   "lower": 397985591869440,
+   "status": "incomplete",
+   "upper": 398010389250048,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 327366958756608,
+   "status": "incomplete",
+   "upper": 327367222673664,
+   "value": null
+  }
+ },
+ "GLM-5|500|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 40600645632000
+  },
+  "enriched_hbm_read": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "flops": [
+   40600645632000,
+   0,
+   0,
+   40600645632000
+  ],
+  "hbm": [
+   82149261312,
+   534144000,
+   81670029312,
+   0,
+   0,
+   479232000
+  ],
+  "hbm_read_interval": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 40600645632000
+  },
+  "reuse_hbm_read": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 40600645632000,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  }
+ },
+ "GLM-5|500|0|250": {
+  "enriched_flops": {
+   "lower": 20480034816000,
+   "status": "incomplete",
+   "upper": 40600645632000,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "flops": [
+   20480034816000,
+   0,
+   0,
+   20480034816000
+  ],
+  "hbm": [
+   81906573312,
+   267072000,
+   81666957312,
+   0,
+   0,
+   239616000
+  ],
+  "hbm_read_interval": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486159552512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 20480034816000
+  },
+  "reuse_hbm_read": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486159552512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 40600645632000,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  }
+ },
+ "GLM-5|500|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 40602548797440
+  },
+  "enriched_hbm_read": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "flops": [
+   40600645632000,
+   0,
+   1903165440,
+   40602548797440
+  ],
+  "hbm": [
+   82149261312,
+   534144000,
+   81670029312,
+   0,
+   0,
+   479232000
+  ],
+  "hbm_read_interval": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 40602548797440
+  },
+  "reuse_hbm_read": {
+   "lower": 82149261312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 87426170880,
+   "status": "incomplete",
+   "upper": 40602548797440,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 81719877888,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  }
+ },
+ "GLM-5|500|1|250": {
+  "enriched_flops": {
+   "lower": 20481937981440,
+   "status": "incomplete",
+   "upper": 40602548797440,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  },
+  "flops": [
+   20480034816000,
+   0,
+   1903165440,
+   20481937981440
+  ],
+  "hbm": [
+   81906573312,
+   267072000,
+   81666957312,
+   0,
+   0,
+   239616000
+  ],
+  "hbm_read_interval": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486159552512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 20481937981440
+  },
+  "reuse_hbm_read": {
+   "lower": 81906573312,
+   "status": "incomplete",
+   "upper": 1486159552512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 87426170880,
+   "status": "incomplete",
+   "upper": 40602548797440,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 81719877888,
+   "status": "incomplete",
+   "upper": 1486402240512,
+   "value": null
+  }
+ },
+ "GLM-5|500|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 67255380246528
+  },
+  "enriched_hbm_read": {
+   "lower": 24521285518848,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  },
+  "flops": [
+   40600645632000,
+   26083784982528,
+   570949632000,
+   67255380246528
+  ],
+  "hbm": [
+   24521285518848,
+   853562112,
+   24499175411712,
+   21344294400,
+   0,
+   765812736
+  ],
+  "hbm_read_interval": {
+   "lower": 24521285518848,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 67255380246528
+  },
+  "reuse_hbm_read": {
+   "lower": 24521285518848,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 26743696588800,
+   "status": "incomplete",
+   "upper": 67255380246528,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24520888972800,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  }
+ },
+ "GLM-5|500|300|250": {
+  "enriched_flops": {
+   "lower": 47134769430528,
+   "status": "incomplete",
+   "upper": 67255380246528,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 24521042830848,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  },
+  "flops": [
+   20480034816000,
+   26083784982528,
+   570949632000,
+   47134769430528
+  ],
+  "hbm": [
+   24521042830848,
+   586490112,
+   24499172339712,
+   21344294400,
+   0,
+   526196736
+  ],
+  "hbm_read_interval": {
+   "lower": 24521042830848,
+   "status": "incomplete",
+   "upper": 25925295810048,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 47134769430528
+  },
+  "reuse_hbm_read": {
+   "lower": 24521042830848,
+   "status": "incomplete",
+   "upper": 25925295810048,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 26743696588800,
+   "status": "incomplete",
+   "upper": 67255380246528,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24520888972800,
+   "status": "incomplete",
+   "upper": 25925538498048,
+   "value": null
+  }
+ },
+ "GLM-5|500|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 449522067111936
+  },
+  "enriched_hbm_read": {
+   "lower": 327487863470592,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  },
+  "flops": [
+   40600645632000,
+   401308759719936,
+   7612661760000,
+   449522067111936
+  ],
+  "hbm": [
+   327487863470592,
+   4806227712,
+   326655596531712,
+   827954809344,
+   0,
+   4312129536
+  ],
+  "hbm_read_interval": {
+   "lower": 327487863470592,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 449522067111936
+  },
+  "reuse_hbm_read": {
+   "lower": 327487863470592,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 409026304180224,
+   "status": "incomplete",
+   "upper": 449522067111936,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 327487652946432,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  }
+ },
+ "GLM-5|500|4000|250": {
+  "enriched_flops": {
+   "lower": 429401456295936,
+   "status": "incomplete",
+   "upper": 449522067111936,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 327487620782592,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  },
+  "flops": [
+   20480034816000,
+   401308759719936,
+   7612661760000,
+   429401456295936
+  ],
+  "hbm": [
+   327487620782592,
+   4539155712,
+   326655593459712,
+   827954809344,
+   0,
+   4072513536
+  ],
+  "hbm_read_interval": {
+   "lower": 327487620782592,
+   "status": "incomplete",
+   "upper": 328891873761792,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 429401456295936
+  },
+  "reuse_hbm_read": {
+   "lower": 327487620782592,
+   "status": "incomplete",
+   "upper": 328891873761792,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 409026304180224,
+   "status": "incomplete",
+   "upper": 449522067111936,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 327487652946432,
+   "status": "incomplete",
+   "upper": 328892116449792,
+   "value": null
+  }
+ },
+ "GLM-5|60000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6553243124760576
+  },
+  "enriched_hbm_read": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "flops": [
+   6553243124760576,
+   0,
+   0,
+   6553243124760576
+  ],
+  "hbm": [
+   139909005312,
+   64097280000,
+   82401165312,
+   0,
+   0,
+   57507840000
+  ],
+  "hbm_read_interval": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6553243124760576
+  },
+  "reuse_hbm_read": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 6553243124760576,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  }
+ },
+ "GLM-5|60000|0|30000": {
+  "enriched_flops": {
+   "lower": 3569518264320000,
+   "status": "incomplete",
+   "upper": 6553243124760576,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "flops": [
+   3569518264320000,
+   0,
+   0,
+   3569518264320000
+  ],
+  "hbm": [
+   110786445312,
+   32048640000,
+   82032525312,
+   0,
+   0,
+   28753920000
+  ],
+  "hbm_read_interval": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1515039424512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3569518264320000
+  },
+  "reuse_hbm_read": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1515039424512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 6553243124760576,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  }
+ },
+ "GLM-5|60000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6553245027926016
+  },
+  "enriched_hbm_read": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "flops": [
+   6553243124760576,
+   0,
+   1903165440,
+   6553245027926016
+  ],
+  "hbm": [
+   139909005312,
+   64097280000,
+   82401165312,
+   0,
+   0,
+   57507840000
+  ],
+  "hbm_read_interval": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6553245027926016
+  },
+  "reuse_hbm_read": {
+   "lower": 139909005312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 142249672704,
+   "status": "incomplete",
+   "upper": 6553245027926016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 83046981120,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  }
+ },
+ "GLM-5|60000|1|30000": {
+  "enriched_flops": {
+   "lower": 3569520167485440,
+   "status": "incomplete",
+   "upper": 6553245027926016,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  },
+  "flops": [
+   3569518264320000,
+   0,
+   1903165440,
+   3569520167485440
+  ],
+  "hbm": [
+   110786445312,
+   32048640000,
+   82032525312,
+   0,
+   0,
+   28753920000
+  ],
+  "hbm_read_interval": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1515039424512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3569520167485440
+  },
+  "reuse_hbm_read": {
+   "lower": 110786445312,
+   "status": "incomplete",
+   "upper": 1515039424512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 142249672704,
+   "status": "incomplete",
+   "upper": 6553245027926016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 83046981120,
+   "status": "incomplete",
+   "upper": 1544161984512,
+   "value": null
+  }
+ },
+ "GLM-5|60000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6595806147084288
+  },
+  "enriched_hbm_read": {
+   "lower": 24971845954560,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  },
+  "flops": [
+   6553243124760576,
+   41992072691712,
+   570949632000,
+   6595806147084288
+  ],
+  "hbm": [
+   24971845954560,
+   64416698112,
+   24499906547712,
+   414144986112,
+   0,
+   57794420736
+  ],
+  "hbm_read_interval": {
+   "lower": 24971845954560,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6595806147084288
+  },
+  "reuse_hbm_read": {
+   "lower": 24971845954560,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 42703559884800,
+   "status": "incomplete",
+   "upper": 6595806147084288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24914989900800,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  }
+ },
+ "GLM-5|60000|300|30000": {
+  "enriched_flops": {
+   "lower": 3612081286643712,
+   "status": "incomplete",
+   "upper": 6595806147084288,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 24942723394560,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  },
+  "flops": [
+   3569518264320000,
+   41992072691712,
+   570949632000,
+   3612081286643712
+  ],
+  "hbm": [
+   24942723394560,
+   32368058112,
+   24499537907712,
+   414144986112,
+   0,
+   29040500736
+  ],
+  "hbm_read_interval": {
+   "lower": 24942723394560,
+   "status": "incomplete",
+   "upper": 26346976373760,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3612081286643712
+  },
+  "reuse_hbm_read": {
+   "lower": 24942723394560,
+   "status": "incomplete",
+   "upper": 26346976373760,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 42703559884800,
+   "status": "incomplete",
+   "upper": 6595806147084288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24914989900800,
+   "status": "incomplete",
+   "upper": 26376098933760,
+   "value": null
+  }
+ },
+ "GLM-5|60000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7127209443852288
+  },
+  "enriched_hbm_read": {
+   "lower": 332404410716160,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  },
+  "flops": [
+   6553243124760576,
+   566353657331712,
+   7612661760000,
+   7127209443852288
+  ],
+  "hbm": [
+   332404410716160,
+   68369363712,
+   326656327667712,
+   5686742310912,
+   0,
+   61340737536
+  ],
+  "hbm_read_interval": {
+   "lower": 332404410716160,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7127209443852288
+  },
+  "reuse_hbm_read": {
+   "lower": 332404410716160,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 574109220864000,
+   "status": "incomplete",
+   "upper": 7127209443852288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 332347628544000,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  }
+ },
+ "GLM-5|60000|4000|30000": {
+  "enriched_flops": {
+   "lower": 4143484583411712,
+   "status": "incomplete",
+   "upper": 7127209443852288,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 332375288156160,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  },
+  "flops": [
+   3569518264320000,
+   566353657331712,
+   7612661760000,
+   4143484583411712
+  ],
+  "hbm": [
+   332375288156160,
+   36320723712,
+   326655959027712,
+   5686742310912,
+   0,
+   32586817536
+  ],
+  "hbm_read_interval": {
+   "lower": 332375288156160,
+   "status": "incomplete",
+   "upper": 333779541135360,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4143484583411712
+  },
+  "reuse_hbm_read": {
+   "lower": 332375288156160,
+   "status": "incomplete",
+   "upper": 333779541135360,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 574109220864000,
+   "status": "incomplete",
+   "upper": 7127209443852288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 332347628544000,
+   "status": "incomplete",
+   "upper": 333808663695360,
+   "value": null
+  }
+ },
+ "GLM-5|8000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 731572405272576
+  },
+  "enriched_hbm_read": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "flops": [
+   731572405272576,
+   0,
+   0,
+   731572405272576
+  ],
+  "hbm": [
+   89429901312,
+   8546304000,
+   81762189312,
+   0,
+   0,
+   7667712000
+  ],
+  "hbm_read_interval": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 731572405272576
+  },
+  "reuse_hbm_read": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 731572405272576,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  }
+ },
+ "GLM-5|8000|0|4000": {
+  "enriched_flops": {
+   "lower": 376255512576000,
+   "status": "incomplete",
+   "upper": 731572405272576,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "flops": [
+   376255512576000,
+   0,
+   0,
+   376255512576000
+  ],
+  "hbm": [
+   85546893312,
+   4273152000,
+   81713037312,
+   0,
+   0,
+   3833856000
+  ],
+  "hbm_read_interval": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1489799872512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 376255512576000
+  },
+  "reuse_hbm_read": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1489799872512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 731572405272576,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 0,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  }
+ },
+ "GLM-5|8000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 731574308438016
+  },
+  "enriched_hbm_read": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "flops": [
+   731572405272576,
+   0,
+   1903165440,
+   731574308438016
+  ],
+  "hbm": [
+   89429901312,
+   8546304000,
+   81762189312,
+   0,
+   0,
+   7667712000
+  ],
+  "hbm_read_interval": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 731574308438016
+  },
+  "reuse_hbm_read": {
+   "lower": 89429901312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 109022920704,
+   "status": "incomplete",
+   "upper": 731574308438016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 82008645120,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  }
+ },
+ "GLM-5|8000|1|4000": {
+  "enriched_flops": {
+   "lower": 376257415741440,
+   "status": "incomplete",
+   "upper": 731574308438016,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  },
+  "flops": [
+   376255512576000,
+   0,
+   1903165440,
+   376257415741440
+  ],
+  "hbm": [
+   85546893312,
+   4273152000,
+   81713037312,
+   0,
+   0,
+   3833856000
+  ],
+  "hbm_read_interval": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1489799872512,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 376257415741440
+  },
+  "reuse_hbm_read": {
+   "lower": 85546893312,
+   "status": "incomplete",
+   "upper": 1489799872512,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 109022920704,
+   "status": "incomplete",
+   "upper": 731574308438016,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 82008645120,
+   "status": "incomplete",
+   "upper": 1493682880512,
+   "value": null
+  }
+ },
+ "GLM-5|8000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 764200628748288
+  },
+  "enriched_hbm_read": {
+   "lower": 24610904386560,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  },
+  "flops": [
+   731572405272576,
+   32057273843712,
+   570949632000,
+   764200628748288
+  ],
+  "hbm": [
+   24610904386560,
+   8865722112,
+   24499267571712,
+   103682522112,
+   0,
+   7954292736
+  ],
+  "hbm_read_interval": {
+   "lower": 24610904386560,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 764200628748288
+  },
+  "reuse_hbm_read": {
+   "lower": 24610904386560,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 32735534284800,
+   "status": "incomplete",
+   "upper": 764200628748288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24603489100800,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  }
+ },
+ "GLM-5|8000|300|4000": {
+  "enriched_flops": {
+   "lower": 408883736051712,
+   "status": "incomplete",
+   "upper": 764200628748288,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 24607021378560,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  },
+  "flops": [
+   376255512576000,
+   32057273843712,
+   570949632000,
+   408883736051712
+  ],
+  "hbm": [
+   24607021378560,
+   4592570112,
+   24499218419712,
+   103682522112,
+   0,
+   4120436736
+  ],
+  "hbm_read_interval": {
+   "lower": 24607021378560,
+   "status": "incomplete",
+   "upper": 26011274357760,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 408883736051712
+  },
+  "reuse_hbm_read": {
+   "lower": 24607021378560,
+   "status": "incomplete",
+   "upper": 26011274357760,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 32735534284800,
+   "status": "incomplete",
+   "upper": 764200628748288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 24603489100800,
+   "status": "incomplete",
+   "upper": 26015157365760,
+   "value": null
+  }
+ },
+ "GLM-5|8000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1172664943116288
+  },
+  "enriched_hbm_read": {
+   "lower": 328201625948160,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  },
+  "flops": [
+   731572405272576,
+   433479876083712,
+   7612661760000,
+   1172664943116288
+  ],
+  "hbm": [
+   328201625948160,
+   12818387712,
+   326655688691712,
+   1534436646912,
+   0,
+   11500609536
+  ],
+  "hbm_read_interval": {
+   "lower": 328201625948160,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1172664943116288
+  },
+  "reuse_hbm_read": {
+   "lower": 328201625948160,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 441202212864000,
+   "status": "incomplete",
+   "upper": 1172664943116288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 328194284544000,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  }
+ },
+ "GLM-5|8000|4000|4000": {
+  "enriched_flops": {
+   "lower": 817348050419712,
+   "status": "incomplete",
+   "upper": 1172664943116288,
+   "value": null
+  },
+  "enriched_hbm_read": {
+   "lower": 328197742940160,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  },
+  "flops": [
+   376255512576000,
+   433479876083712,
+   7612661760000,
+   817348050419712
+  ],
+  "hbm": [
+   328197742940160,
+   8545235712,
+   326655639539712,
+   1534436646912,
+   0,
+   7666753536
+  ],
+  "hbm_read_interval": {
+   "lower": 328197742940160,
+   "status": "incomplete",
+   "upper": 329601995919360,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 817348050419712
+  },
+  "reuse_hbm_read": {
+   "lower": 328197742940160,
+   "status": "incomplete",
+   "upper": 329601995919360,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": 441202212864000,
+   "status": "incomplete",
+   "upper": 1172664943116288,
+   "value": null
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 328194284544000,
+   "status": "incomplete",
+   "upper": 329605878927360,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|1|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 31100436480
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "flops": [
+   31100436480,
+   0,
+   0,
+   31100436480
+  ],
+  "hbm": [
+   32851566592,
+   189265920,
+   32662331392,
+   0,
+   188743680,
+   491520
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 31100436480
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 31100436480
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  }
+ },
+ "Qwen3.5-397B-A17B|1|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 33134673920
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "flops": [
+   31100436480,
+   0,
+   2034237440,
+   33134673920
+  ],
+  "hbm": [
+   32851566592,
+   189265920,
+   32662331392,
+   0,
+   188743680,
+   491520
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 33134673920
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 33134673920
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32851566592
+  }
+ },
+ "Qwen3.5-397B-A17B|1|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9962446848000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9856856954880
+  },
+  "flops": [
+   31100436480,
+   9321075179520,
+   610271232000,
+   9962446848000
+  ],
+  "hbm": [
+   9856856954880,
+   56779776000,
+   9798699417600,
+   1386977280,
+   56623104000,
+   147456000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9856856954880
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9962446848000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9856856954880
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9962446848000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 9856856954880
+  }
+ },
+ "Qwen3.5-397B-A17B|1|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136469872640000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 131652087777280
+  },
+  "flops": [
+   31100436480,
+   128301822443520,
+   8136949760000,
+   136469872640000
+  ],
+  "hbm": [
+   131652087777280,
+   757063680000,
+   130649325568000,
+   245821409280,
+   754974720000,
+   1966080000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 131652087777280
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136469872640000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 131652087777280
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136469872640000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 131652087777280
+  }
+ },
+ "Qwen3.5-397B-A17B|500|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15611535360000
+  },
+  "enriched_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "flops": [
+   15611535360000,
+   0,
+   0,
+   15611535360000
+  ],
+  "hbm": [
+   34422128640,
+   1771069440,
+   32666419200,
+   0,
+   1509949440,
+   245760000
+  ],
+  "hbm_read_interval": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15611535360000
+  },
+  "reuse_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15611535360000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|0|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7821127680000
+  },
+  "enriched_hbm_read": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "flops": [
+   7821127680000,
+   0,
+   0,
+   7821127680000
+  ],
+  "hbm": [
+   33542225920,
+   885534720,
+   32664371200,
+   0,
+   754974720,
+   122880000
+  ],
+  "hbm_read_interval": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7821127680000
+  },
+  "reuse_hbm_read": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15611535360000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15613569597440
+  },
+  "enriched_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "flops": [
+   15611535360000,
+   0,
+   2034237440,
+   15613569597440
+  ],
+  "hbm": [
+   34422128640,
+   1771069440,
+   32666419200,
+   0,
+   1509949440,
+   245760000
+  ],
+  "hbm_read_interval": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15613569597440
+  },
+  "reuse_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15613569597440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|1|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7823161917440
+  },
+  "enriched_hbm_read": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "flops": [
+   7821127680000,
+   0,
+   2034237440,
+   7823161917440
+  ],
+  "hbm": [
+   33542225920,
+   885534720,
+   32664371200,
+   0,
+   754974720,
+   122880000
+  ],
+  "hbm_read_interval": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7823161917440
+  },
+  "reuse_hbm_read": {
+   "lower": 33542225920,
+   "status": "incomplete",
+   "upper": 791536844800,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 15613569597440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 34422128640,
+   "status": "incomplete",
+   "upper": 792416747520,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25616217047040
+  },
+  "enriched_hbm_read": {
+   "lower": 9863010971648,
+   "status": "incomplete",
+   "upper": 10621005590528,
+   "value": null
+  },
+  "flops": [
+   15611535360000,
+   9394410455040,
+   610271232000,
+   25616217047040
+  ],
+  "hbm": [
+   9863010971648,
+   58361579520,
+   9798703505408,
+   5970432000,
+   57944309760,
+   392724480
+  ],
+  "hbm_read_interval": {
+   "lower": 9863010971648,
+   "status": "incomplete",
+   "upper": 10621005590528,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25616217047040
+  },
+  "reuse_hbm_read": {
+   "lower": 9863010971648,
+   "status": "incomplete",
+   "upper": 10621005590528,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25616217047040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 9863010971648,
+   "status": "incomplete",
+   "upper": 10621005590528,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|300|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 17825809367040
+  },
+  "enriched_hbm_read": {
+   "lower": 9862131068928,
+   "status": "incomplete",
+   "upper": 10620125687808,
+   "value": null
+  },
+  "flops": [
+   7821127680000,
+   9394410455040,
+   610271232000,
+   17825809367040
+  ],
+  "hbm": [
+   9862131068928,
+   57476044800,
+   9798701457408,
+   5970432000,
+   57189335040,
+   269844480
+  ],
+  "hbm_read_interval": {
+   "lower": 9862131068928,
+   "status": "incomplete",
+   "upper": 10620125687808,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 17825809367040
+  },
+  "reuse_hbm_read": {
+   "lower": 9862131068928,
+   "status": "incomplete",
+   "upper": 10620125687808,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 25616217047040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 9863010971648,
+   "status": "incomplete",
+   "upper": 10621005590528,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 153031136215040
+  },
+  "enriched_hbm_read": {
+   "lower": 131714960130048,
+   "status": "incomplete",
+   "upper": 132472954748928,
+   "value": null
+  },
+  "flops": [
+   15611535360000,
+   129282651095040,
+   8136949760000,
+   153031136215040
+  ],
+  "hbm": [
+   131714960130048,
+   758645483520,
+   130649329655808,
+   307123200000,
+   756295925760,
+   2211348480
+  ],
+  "hbm_read_interval": {
+   "lower": 131714960130048,
+   "status": "incomplete",
+   "upper": 132472954748928,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 153031136215040
+  },
+  "reuse_hbm_read": {
+   "lower": 131714960130048,
+   "status": "incomplete",
+   "upper": 132472954748928,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 153031136215040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 131714960130048,
+   "status": "incomplete",
+   "upper": 132472954748928,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|500|4000|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 145240728535040
+  },
+  "enriched_hbm_read": {
+   "lower": 131714080227328,
+   "status": "incomplete",
+   "upper": 132472074846208,
+   "value": null
+  },
+  "flops": [
+   7821127680000,
+   129282651095040,
+   8136949760000,
+   145240728535040
+  ],
+  "hbm": [
+   131714080227328,
+   757759948800,
+   130649327607808,
+   307123200000,
+   755540951040,
+   2088468480
+  ],
+  "hbm_read_interval": {
+   "lower": 131714080227328,
+   "status": "incomplete",
+   "upper": 132472074846208,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 145240728535040
+  },
+  "reuse_hbm_read": {
+   "lower": 131714080227328,
+   "status": "incomplete",
+   "upper": 132472074846208,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 153031136215040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 131714960130048,
+   "status": "incomplete",
+   "upper": 132472954748928,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750747443200000
+  },
+  "enriched_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "flops": [
+   2750747443200000,
+   0,
+   0,
+   2750747443200000
+  ],
+  "hbm": [
+   239686615040,
+   208375971840,
+   33153843200,
+   0,
+   177041571840,
+   29491200000
+  ],
+  "hbm_read_interval": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750747443200000
+  },
+  "reuse_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750747443200000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|0|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1596557721600000
+  },
+  "enriched_hbm_read": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "flops": [
+   1596557721600000,
+   0,
+   0,
+   1596557721600000
+  ],
+  "hbm": [
+   136174469120,
+   104187985920,
+   32908083200,
+   0,
+   88520785920,
+   14745600000
+  ],
+  "hbm_read_interval": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1596557721600000
+  },
+  "reuse_hbm_read": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750747443200000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750749477437440
+  },
+  "enriched_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "flops": [
+   2750747443200000,
+   0,
+   2034237440,
+   2750749477437440
+  ],
+  "hbm": [
+   239686615040,
+   208375971840,
+   33153843200,
+   0,
+   177041571840,
+   29491200000
+  ],
+  "hbm_read_interval": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750749477437440
+  },
+  "reuse_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750749477437440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|1|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1596559755837440
+  },
+  "enriched_hbm_read": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "flops": [
+   1596557721600000,
+   0,
+   2034237440,
+   1596559755837440
+  ],
+  "hbm": [
+   136174469120,
+   104187985920,
+   32908083200,
+   0,
+   88520785920,
+   14745600000
+  ],
+  "hbm_read_interval": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1596559755837440
+  },
+  "reuse_hbm_read": {
+   "lower": 136174469120,
+   "status": "incomplete",
+   "upper": 894169088000,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2750749477437440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 239686615040,
+   "status": "incomplete",
+   "upper": 997681233920,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2769496511447040
+  },
+  "enriched_hbm_read": {
+   "lower": 10614799618048,
+   "status": "incomplete",
+   "upper": 11372794236928,
+   "value": null
+  },
+  "flops": [
+   2750747443200000,
+   18138797015040,
+   610271232000,
+   2769496511447040
+  ],
+  "hbm": [
+   10614799618048,
+   264966481920,
+   9799190929408,
+   552494592000,
+   233475932160,
+   29638164480
+  ],
+  "hbm_read_interval": {
+   "lower": 10614799618048,
+   "status": "incomplete",
+   "upper": 11372794236928,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2769496511447040
+  },
+  "reuse_hbm_read": {
+   "lower": 10614799618048,
+   "status": "incomplete",
+   "upper": 11372794236928,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2769496511447040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 10614799618048,
+   "status": "incomplete",
+   "upper": 11372794236928,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|300|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1615306789847040
+  },
+  "enriched_hbm_read": {
+   "lower": 10511287472128,
+   "status": "incomplete",
+   "upper": 11269282091008,
+   "value": null
+  },
+  "flops": [
+   1596557721600000,
+   18138797015040,
+   610271232000,
+   1615306789847040
+  ],
+  "hbm": [
+   10511287472128,
+   160778496000,
+   9798945169408,
+   552494592000,
+   144955146240,
+   14892564480
+  ],
+  "hbm_read_interval": {
+   "lower": 10511287472128,
+   "status": "incomplete",
+   "upper": 11269282091008,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1615306789847040
+  },
+  "reuse_hbm_read": {
+   "lower": 10511287472128,
+   "status": "incomplete",
+   "upper": 11269282091008,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2769496511447040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 10614799618048,
+   "status": "incomplete",
+   "upper": 11372794236928,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3005119558615040
+  },
+  "enriched_hbm_read": {
+   "lower": 139229756776448,
+   "status": "incomplete",
+   "upper": 139987751395328,
+   "value": null
+  },
+  "flops": [
+   2750747443200000,
+   246235165655040,
+   8136949760000,
+   3005119558615040
+  ],
+  "hbm": [
+   139229756776448,
+   965250385920,
+   130649817079808,
+   7616655360000,
+   931827548160,
+   31456788480
+  ],
+  "hbm_read_interval": {
+   "lower": 139229756776448,
+   "status": "incomplete",
+   "upper": 139987751395328,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3005119558615040
+  },
+  "reuse_hbm_read": {
+   "lower": 139229756776448,
+   "status": "incomplete",
+   "upper": 139987751395328,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3005119558615040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 139229756776448,
+   "status": "incomplete",
+   "upper": 139987751395328,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|60000|4000|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1850929837015040
+  },
+  "enriched_hbm_read": {
+   "lower": 139126244630528,
+   "status": "incomplete",
+   "upper": 139884239249408,
+   "value": null
+  },
+  "flops": [
+   1596557721600000,
+   246235165655040,
+   8136949760000,
+   1850929837015040
+  ],
+  "hbm": [
+   139126244630528,
+   861062400000,
+   130649571319808,
+   7616655360000,
+   843306762240,
+   16711188480
+  ],
+  "hbm_read_interval": {
+   "lower": 139126244630528,
+   "status": "incomplete",
+   "upper": 139884239249408,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1850929837015040
+  },
+  "reuse_hbm_read": {
+   "lower": 139126244630528,
+   "status": "incomplete",
+   "upper": 139884239249408,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3005119558615040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 139229756776448,
+   "status": "incomplete",
+   "upper": 139987751395328,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264530165760000
+  },
+  "enriched_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "flops": [
+   264530165760000,
+   0,
+   0,
+   264530165760000
+  ],
+  "hbm": [
+   60252979200,
+   27770880000,
+   32727859200,
+   0,
+   23592960000,
+   3932160000
+  ],
+  "hbm_read_interval": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264530165760000
+  },
+  "reuse_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264530165760000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|0|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136197242880000
+  },
+  "enriched_hbm_read": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "flops": [
+   136197242880000,
+   0,
+   0,
+   136197242880000
+  ],
+  "hbm": [
+   46552023040,
+   13979811840,
+   32695091200,
+   0,
+   11890851840,
+   1966080000
+  ],
+  "hbm_read_interval": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136197242880000
+  },
+  "reuse_hbm_read": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264530165760000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264532199997440
+  },
+  "enriched_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "flops": [
+   264530165760000,
+   0,
+   2034237440,
+   264532199997440
+  ],
+  "hbm": [
+   60252979200,
+   27770880000,
+   32727859200,
+   0,
+   23592960000,
+   3932160000
+  ],
+  "hbm_read_interval": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264532199997440
+  },
+  "reuse_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264532199997440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|1|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136199277117440
+  },
+  "enriched_hbm_read": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "flops": [
+   136197242880000,
+   0,
+   2034237440,
+   136199277117440
+  ],
+  "hbm": [
+   46552023040,
+   13979811840,
+   32695091200,
+   0,
+   11890851840,
+   1966080000
+  ],
+  "hbm_read_interval": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 136199277117440
+  },
+  "reuse_hbm_read": {
+   "lower": 46552023040,
+   "status": "incomplete",
+   "upper": 804546641920,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 264532199997440
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 60252979200,
+   "status": "incomplete",
+   "upper": 818247598080,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 275637081047040
+  },
+  "enriched_hbm_read": {
+   "lower": 9957731422208,
+   "status": "incomplete",
+   "upper": 10715726041088,
+   "value": null
+  },
+  "flops": [
+   264530165760000,
+   10496644055040,
+   610271232000,
+   275637081047040
+  ],
+  "hbm": [
+   9957731422208,
+   84361390080,
+   9798764945408,
+   74860032000,
+   80027320320,
+   4079124480
+  ],
+  "hbm_read_interval": {
+   "lower": 9957731422208,
+   "status": "incomplete",
+   "upper": 10715726041088,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 275637081047040
+  },
+  "reuse_hbm_read": {
+   "lower": 9957731422208,
+   "status": "incomplete",
+   "upper": 10715726041088,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 275637081047040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 9957731422208,
+   "status": "incomplete",
+   "upper": 10715726041088,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|300|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 147304158167040
+  },
+  "enriched_hbm_read": {
+   "lower": 9944030466048,
+   "status": "incomplete",
+   "upper": 10702025084928,
+   "value": null
+  },
+  "flops": [
+   136197242880000,
+   10496644055040,
+   610271232000,
+   147304158167040
+  ],
+  "hbm": [
+   9944030466048,
+   70570321920,
+   9798732177408,
+   74860032000,
+   68325212160,
+   2113044480
+  ],
+  "hbm_read_interval": {
+   "lower": 9944030466048,
+   "status": "incomplete",
+   "upper": 10702025084928,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 147304158167040
+  },
+  "reuse_hbm_read": {
+   "lower": 9944030466048,
+   "status": "incomplete",
+   "upper": 10702025084928,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 275637081047040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 9957731422208,
+   "status": "incomplete",
+   "upper": 10715726041088,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 416691680215040
+  },
+  "enriched_hbm_read": {
+   "lower": 132662160580608,
+   "status": "incomplete",
+   "upper": 133420155199488,
+   "value": null
+  },
+  "flops": [
+   264530165760000,
+   144024564695040,
+   8136949760000,
+   416691680215040
+  ],
+  "hbm": [
+   132662160580608,
+   784645294080,
+   130649391095808,
+   1228492800000,
+   778378936320,
+   5897748480
+  ],
+  "hbm_read_interval": {
+   "lower": 132662160580608,
+   "status": "incomplete",
+   "upper": 133420155199488,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 416691680215040
+  },
+  "reuse_hbm_read": {
+   "lower": 132662160580608,
+   "status": "incomplete",
+   "upper": 133420155199488,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 416691680215040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 132662160580608,
+   "status": "incomplete",
+   "upper": 133420155199488,
+   "value": null
+  }
+ },
+ "Qwen3.5-397B-A17B|8000|4000|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 288358757335040
+  },
+  "enriched_hbm_read": {
+   "lower": 132648459624448,
+   "status": "incomplete",
+   "upper": 133406454243328,
+   "value": null
+  },
+  "flops": [
+   136197242880000,
+   144024564695040,
+   8136949760000,
+   288358757335040
+  ],
+  "hbm": [
+   132648459624448,
+   770854225920,
+   130649358327808,
+   1228492800000,
+   766676828160,
+   3931668480
+  ],
+  "hbm_read_interval": {
+   "lower": 132648459624448,
+   "status": "incomplete",
+   "upper": 133406454243328,
+   "value": null
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 288358757335040
+  },
+  "reuse_hbm_read": {
+   "lower": 132648459624448,
+   "status": "incomplete",
+   "upper": 133406454243328,
+   "value": null
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 416691680215040
+  },
+  "unknown_cache_hbm_read": {
+   "lower": 132662160580608,
+   "status": "incomplete",
+   "upper": 133420155199488,
+   "value": null
+  }
+ },
+ "Qwen3.5-4B|1|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7265714176
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "flops": [
+   7265714176,
+   0,
+   0,
+   7265714176
+  ],
+  "hbm": [
+   8461647872,
+   50528256,
+   8411152384,
+   0,
+   50331648,
+   163840
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7265714176
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 7265714176
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  }
+ },
+ "Qwen3.5-4B|1|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8537112576
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "flops": [
+   7265714176,
+   0,
+   1271398400,
+   8537112576
+  ],
+  "hbm": [
+   8461647872,
+   50528256,
+   8411152384,
+   0,
+   50331648,
+   163840
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8537112576
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8537112576
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8461647872
+  }
+ },
+ "Qwen3.5-4B|1|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2567012352000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2539973804032
+  },
+  "flops": [
+   7265714176,
+   2178327117824,
+   381419520000,
+   2567012352000
+  ],
+  "hbm": [
+   2539973804032,
+   15158476800,
+   2523345715200,
+   1479442432,
+   15099494400,
+   49152000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2539973804032
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2567012352000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2539973804032
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2567012352000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2539973804032
+  }
+ },
+ "Qwen3.5-4B|1|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35196764160000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34108800991232
+  },
+  "flops": [
+   7265714176,
+   30103904845824,
+   5085593600000,
+   35196764160000
+  ],
+  "hbm": [
+   34108800991232,
+   202113024000,
+   33644609536000,
+   262209503232,
+   201326592000,
+   655360000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34108800991232
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35196764160000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34108800991232
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35196764160000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34108800991232
+  }
+ },
+ "Qwen3.5-4B|500|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3649208320000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "flops": [
+   3649208320000,
+   0,
+   0,
+   3649208320000
+  ],
+  "hbm": [
+   8895725568,
+   500957184,
+   8411152384,
+   0,
+   402653184,
+   81920000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3649208320000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3649208320000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  }
+ },
+ "Qwen3.5-4B|500|0|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1828700160000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "flops": [
+   1828700160000,
+   0,
+   0,
+   1828700160000
+  ],
+  "hbm": [
+   8653438976,
+   250478592,
+   8411152384,
+   0,
+   201326592,
+   40960000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1828700160000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3649208320000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  }
+ },
+ "Qwen3.5-4B|500|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3650479718400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "flops": [
+   3649208320000,
+   0,
+   1271398400,
+   3650479718400
+  ],
+  "hbm": [
+   8895725568,
+   500957184,
+   8411152384,
+   0,
+   402653184,
+   81920000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3650479718400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3650479718400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  }
+ },
+ "Qwen3.5-4B|500|1|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1829971558400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "flops": [
+   1828700160000,
+   0,
+   1271398400,
+   1829971558400
+  ],
+  "hbm": [
+   8653438976,
+   250478592,
+   8411152384,
+   0,
+   201326592,
+   40960000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 1829971558400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8653438976
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3650479718400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 8895725568
+  }
+ },
+ "Qwen3.5-4B|500|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6228511031296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545296900096
+  },
+  "flops": [
+   3649208320000,
+   2197883191296,
+   381419520000,
+   6228511031296
+  ],
+  "hbm": [
+   2545296900096,
+   15608905728,
+   2523345715200,
+   6368460800,
+   15451815936,
+   130908160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545296900096
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6228511031296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545296900096
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6228511031296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545296900096
+  }
+ },
+ "Qwen3.5-4B|500|300|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4408002871296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545054613504
+  },
+  "flops": [
+   1828700160000,
+   2197883191296,
+   381419520000,
+   4408002871296
+  ],
+  "hbm": [
+   2545054613504,
+   15358427136,
+   2523345715200,
+   6368460800,
+   15250489344,
+   89948160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545054613504
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 4408002871296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545054613504
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 6228511031296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2545296900096
+  }
+ },
+ "Qwen3.5-4B|500|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 39100261072896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174623645696
+  },
+  "flops": [
+   3649208320000,
+   30365459152896,
+   5085593600000,
+   39100261072896
+  ],
+  "hbm": [
+   34174623645696,
+   202563452928,
+   33644609536000,
+   327598080000,
+   201678913536,
+   737116160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174623645696
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 39100261072896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174623645696
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 39100261072896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174623645696
+  }
+ },
+ "Qwen3.5-4B|500|4000|250": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 37279752912896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174381359104
+  },
+  "flops": [
+   1828700160000,
+   30365459152896,
+   5085593600000,
+   37279752912896
+  ],
+  "hbm": [
+   34174381359104,
+   202312974336,
+   33644609536000,
+   327598080000,
+   201477586944,
+   696156160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174381359104
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 37279752912896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174381359104
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 39100261072896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 34174623645696
+  }
+ },
+ "Qwen3.5-4B|60000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671868518400000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "flops": [
+   671868518400000,
+   0,
+   0,
+   671868518400000
+  ],
+  "hbm": [
+   65452638208,
+   59007565824,
+   8411152384,
+   0,
+   47211085824,
+   9830400000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671868518400000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671868518400000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  }
+ },
+ "Qwen3.5-4B|60000|0|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 394916659200000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "flops": [
+   394916659200000,
+   0,
+   0,
+   394916659200000
+  ],
+  "hbm": [
+   36931895296,
+   29503782912,
+   8411152384,
+   0,
+   23605542912,
+   4915200000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 394916659200000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671868518400000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  }
+ },
+ "Qwen3.5-4B|60000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671869789798400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "flops": [
+   671868518400000,
+   0,
+   1271398400,
+   671869789798400
+  ],
+  "hbm": [
+   65452638208,
+   59007565824,
+   8411152384,
+   0,
+   47211085824,
+   9830400000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671869789798400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671869789798400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  }
+ },
+ "Qwen3.5-4B|60000|1|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 394917930598400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "flops": [
+   394916659200000,
+   0,
+   1271398400,
+   394917930598400
+  ],
+  "hbm": [
+   36931895296,
+   29503782912,
+   8411152384,
+   0,
+   23605542912,
+   4915200000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 394917930598400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 36931895296
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 671869789798400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65452638208
+  }
+ },
+ "Qwen3.5-4B|60000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 676779657527296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3184812916736
+  },
+  "flops": [
+   671868518400000,
+   4529719607296,
+   381419520000,
+   676779657527296
+  ],
+  "hbm": [
+   3184812916736,
+   74115514368,
+   2523345715200,
+   589327564800,
+   62260248576,
+   9879388160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3184812916736
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 676779657527296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3184812916736
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 676779657527296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3184812916736
+  }
+ },
+ "Qwen3.5-4B|60000|300|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 399827798327296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3156292173824
+  },
+  "flops": [
+   394916659200000,
+   4529719607296,
+   381419520000,
+   399827798327296
+  ],
+  "hbm": [
+   3156292173824,
+   44611731456,
+   2523345715200,
+   589327564800,
+   38654705664,
+   4964188160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3156292173824
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 399827798327296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3156292173824
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 676779657527296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 3184812916736
+  }
+ },
+ "Qwen3.5-4B|60000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 738506908368896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 42028014862336
+  },
+  "flops": [
+   671868518400000,
+   61552796368896,
+   5085593600000,
+   738506908368896
+  ],
+  "hbm": [
+   42028014862336,
+   261070061568,
+   33644609536000,
+   8124432384000,
+   248487346176,
+   10485596160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 42028014862336
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 738506908368896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 42028014862336
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 738506908368896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 42028014862336
+  }
+ },
+ "Qwen3.5-4B|60000|4000|30000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 461555049168896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 41999494119424
+  },
+  "flops": [
+   394916659200000,
+   61552796368896,
+   5085593600000,
+   461555049168896
+  ],
+  "hbm": [
+   41999494119424,
+   231566278656,
+   33644609536000,
+   8124432384000,
+   224881803264,
+   5570396160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 41999494119424
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 461555049168896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 41999494119424
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 738506908368896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 42028014862336
+  }
+ },
+ "Qwen3.5-4B|8000|0|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62319493120000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "flops": [
+   62319493120000,
+   0,
+   0,
+   62319493120000
+  ],
+  "hbm": [
+   16013328384,
+   7864320000,
+   8411152384,
+   0,
+   6291456000,
+   1310720000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62319493120000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62319493120000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  }
+ },
+ "Qwen3.5-4B|8000|0|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32208322560000
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "flops": [
+   32208322560000,
+   0,
+   0,
+   32208322560000
+  ],
+  "hbm": [
+   12237406208,
+   3957325824,
+   8411152384,
+   0,
+   3170893824,
+   655360000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32208322560000
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62319493120000
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  }
+ },
+ "Qwen3.5-4B|8000|1|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62320764518400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "flops": [
+   62319493120000,
+   0,
+   1271398400,
+   62320764518400
+  ],
+  "hbm": [
+   16013328384,
+   7864320000,
+   8411152384,
+   0,
+   6291456000,
+   1310720000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62320764518400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62320764518400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  }
+ },
+ "Qwen3.5-4B|8000|1|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32209593958400
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "flops": [
+   32208322560000,
+   0,
+   1271398400,
+   32209593958400
+  ],
+  "hbm": [
+   12237406208,
+   3957325824,
+   8411152384,
+   0,
+   3170893824,
+   655360000
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 32209593958400
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 12237406208
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 62320764518400
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 16013328384
+  }
+ },
+ "Qwen3.5-4B|8000|300|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65192724791296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2625896742912
+  },
+  "flops": [
+   62319493120000,
+   2491812151296,
+   381419520000,
+   65192724791296
+  ],
+  "hbm": [
+   2625896742912,
+   22972268544,
+   2523345715200,
+   79850700800,
+   21340618752,
+   1359708160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2625896742912
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65192724791296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2625896742912
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65192724791296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2625896742912
+  }
+ },
+ "Qwen3.5-4B|8000|300|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35081554231296
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2622120820736
+  },
+  "flops": [
+   32208322560000,
+   2491812151296,
+   381419520000,
+   35081554231296
+  ],
+  "hbm": [
+   2622120820736,
+   19065274368,
+   2523345715200,
+   79850700800,
+   18220056576,
+   704348160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2622120820736
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35081554231296
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2622120820736
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 65192724791296
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 2625896742912
+  }
+ },
+ "Qwen3.5-4B|8000|4000|0": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 101701722832896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35164535488512
+  },
+  "flops": [
+   62319493120000,
+   34296636112896,
+   5085593600000,
+   101701722832896
+  ],
+  "hbm": [
+   35164535488512,
+   209926815744,
+   33644609536000,
+   1310392320000,
+   207567716352,
+   1965916160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35164535488512
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 101701722832896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35164535488512
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 101701722832896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35164535488512
+  }
+ },
+ "Qwen3.5-4B|8000|4000|4000": {
+  "enriched_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 71590552272896
+  },
+  "enriched_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35160759566336
+  },
+  "flops": [
+   32208322560000,
+   34296636112896,
+   5085593600000,
+   71590552272896
+  ],
+  "hbm": [
+   35160759566336,
+   206019821568,
+   33644609536000,
+   1310392320000,
+   204447154176,
+   1310556160
+  ],
+  "hbm_read_interval": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35160759566336
+  },
+  "reuse_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 71590552272896
+  },
+  "reuse_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35160759566336
+  },
+  "unknown_cache_flops": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 101701722832896
+  },
+  "unknown_cache_hbm_read": {
+   "lower": null,
+   "status": "estimated",
+   "upper": null,
+   "value": 35164535488512
+  }
+ }
+}
