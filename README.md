@@ -50,6 +50,12 @@ architecture, for Qwen3.5-4B, Qwen3.5-397B-A17B, DeepSeek-V4-Flash-0731, and GLM
 (`src/specagent/protocol/architectures/`). The runners record per-call token usage so these
 estimates can be computed for every method alike.
 
+How much of each request's input is a reused prefix comes from `specagent.protocol.prefix_reuse`,
+the paper's model of radix prefix caching: requests are grouped into sessions (task, trial,
+model, role, replica), and drafting, verification and repair requests each reuse the running
+maximum of their own backbone. Its `cached_input_tokens` output is the cached count the FLOPs
+and HBM-read estimators take.
+
 ## Tests
 
 ```bash
