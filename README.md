@@ -26,6 +26,7 @@ steps drafted by a weak model:
 | `benchmarks/tau2/` | τ²-Bench agent, baselines, and runner |
 | `benchmarks/automationbench/` | AutomationBench runner and SpecAgent profile |
 | `benchmarks/mcp_atlas/` | MCP-Atlas harness patch, task set, run and scoring scripts |
+| `benchmarks/vitabench/` | VitaBench (Delivery) patch, tool labels, and runner |
 | `tests/` | Unit tests and recorded model traffic for the paper settings |
 
 Every runner and the server default to the settings reported in the paper; each benchmark
@@ -38,8 +39,8 @@ pip install -e ".[tau2,automationbench]"
 ```
 
 Python 3.10 or newer. Benchmark-specific dependencies (tau2-bench, AutomationBench, the
-MCP-Atlas harness) are installed as described in each benchmark README. Model serving is out
-of scope: point the runners at any OpenAI-compatible endpoints (the paper serves the weak
+MCP-Atlas harness, VitaBench) are installed as described in each benchmark README. Model serving
+is out of scope: point the runners at any OpenAI-compatible endpoints (the paper serves the weak
 model with SGLang).
 
 ## Resource estimates
@@ -64,7 +65,8 @@ pip install pytest && pytest
 
 `tests/golden/` replays scripted sessions under the paper settings and checks that every
 request sent to the models is unchanged; the tau2 part runs when tau2-bench with the
-orchestrator patch is installed.
+orchestrator patch is installed. The VitaBench tests that read the benchmark run when
+`VITABENCH_DIR` points at a checkout.
 
 ## License
 
