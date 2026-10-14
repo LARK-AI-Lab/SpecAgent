@@ -2,9 +2,10 @@
 
 Run ``python -m specagent.server --weak-base-url ... --weak-model ... --strong-base-url ...
 --strong-model ...``. Every protocol flag defaults to the MCP-Atlas setting of the paper, so
-endpoint and model flags alone reproduce that configuration. Each client session gets its own
-gateway state; one telemetry line per request records the decision, the verdict, the repair, and
-every model call with its token usage.
+endpoint and model flags alone reproduce that configuration; ``--setting vitabench`` selects the
+paper's VitaBench setting instead. Each client session gets its own gateway state; one telemetry
+line per request records the decision, the verdict, the repair, and every model call with its
+token usage.
 """
 
 from __future__ import annotations
@@ -28,8 +29,10 @@ from typing import Any
 
 from specagent.http_auth import VALID_AUTH_SCHEMES, authorization_header, parse_auth_scheme
 from specagent.protocol.evidence import VerifierInputError
+from specagent.protocol.side_effects import TOOL_CLASS_FILE_ENV, official_mutates_map
 from specagent.runtime.gateway import (
     TASK_SEMANTICS,
+    VERIFIER_PAYLOAD_LABELS,
     GatewayConfig,
     GatewayDecision,
     SpeculativeToolGateway,
@@ -62,10 +65,40 @@ MCP_ATLAS_SETTING: dict[str, Any] = {
     "strong_takeover_after_tool_results": 30,
 }
 
+# The paper's VitaBench setting: only state-changing tool calls are reviewed (replies to the
+# simulated user and K=6 read chunks commit without review), Weak drafts with thinking on and an
+# 8,192-token output cap, Strong repairs with thinking on, reviews with thinking off and without
+# Weak's reasoning. The thinking switches are those of the paper's SGLang deployments. The
+# workspace anchor and legacy payload labels are what that run's reviewer received.
+VITABENCH_SETTING: dict[str, Any] = {
+    "horizon": 6,
+    "weak_reasoning_effort": "high",
+    "weak_max_tokens": 8192,
+    "weak_extra_body": {"chat_template_kwargs": {"enable_thinking": True}},
+    "strong_extra_body": {
+        "chat_template_kwargs": {"enable_thinking": True},
+        "separate_reasoning": True,
+    },
+    "verifier_extra_body": {
+        "chat_template_kwargs": {"enable_thinking": False},
+        "separate_reasoning": True,
+    },
+    "verifier_include_reasoning": False,
+    "review_replies": False,
+    "workspace_dir": "/terrarium/openclaw/workspace",
+    "verifier_payload_labels": "legacy",
+}
+
+PAPER_SETTINGS: dict[str, dict[str, Any]] = {
+    "mcp_atlas": MCP_ATLAS_SETTING,
+    "vitabench": VITABENCH_SETTING,
+}
+
 # One line of CLI help per GatewayConfig field; the flag is the field name with dashes.
 FIELD_HELP: dict[str, str] = {
     "horizon": "Draft batching cap: a candidate of this many reads commits without review",
     "weak_reasoning_effort": "reasoning_effort sent with Weak drafts",
+    "weak_max_tokens": "Output cap of a Weak draft (unset: none)",
     "verifier_reasoning_effort": "reasoning_effort sent with Strong reviews ('off' sends none)",
     "correction_reasoning_effort": "reasoning_effort sent with Strong repair turns",
     "verifier_max_tokens": "Output cap of a Strong review",
@@ -75,6 +108,8 @@ FIELD_HELP: dict[str, str] = {
     "strong_extra_body": "JSON overlay for Strong repair requests ('null' keeps the client's body)",
     "verifier_extra_body": "JSON overlay for Strong review requests ('null' keeps the body)",
     "workspace_dir": "Workspace root shown to the verifier as an anchor (empty: none)",
+    "verifier_payload_labels": "Task id and input-integrity labels in the review payload "
+    "('legacy': those of the paper's VitaBench run)",
     "task_semantics": "'qa' adds the read-only answer rule to the repair note",
     "readonly_tools": "Comma-separated tools treated as reads although their names look like "
     "writes",
@@ -89,6 +124,8 @@ FIELD_HELP: dict[str, str] = {
     "verifier_answer_checks": "Add the answer review checks to the review prompt",
     "strict_answer_review": "Answers must cover every asked item with a supported value",
     "verifier_prompt_suffix": "Text appended to the review system prompt",
+    "review_replies": "Review a text reply before delivery (off: only state-changing tool calls "
+    "are reviewed)",
     "fuse_correction_boundaries": "Comma-separated boundaries (message, mutation) where a "
     "verifier replacement may commit",
     "strict_action_validation": "Reject schema-invalid or unknown-tool repair calls in the gateway "
@@ -672,32 +709,44 @@ def _config_fields() -> list[dataclasses.Field]:
     ]
 
 
+def _setting_defaults(name: str) -> dict[str, Any]:
+    setting = PAPER_SETTINGS[name]
+    return {item.name: setting.get(item.name, item.default) for item in _config_fields()}
+
+
 def _add_config_arguments(parser: argparse.ArgumentParser) -> None:
-    """One flag per GatewayConfig field, defaulting to the MCP-Atlas setting."""
-    group = parser.add_argument_group("protocol (defaults: the paper's MCP-Atlas setting)")
+    """One flag per GatewayConfig field; an unset flag takes the --setting value."""
+    group = parser.add_argument_group("protocol (defaults: the --setting chosen)")
+    group.add_argument(
+        "--setting",
+        choices=tuple(PAPER_SETTINGS),
+        default="mcp_atlas",
+        help="Paper setting that supplies every protocol flag not given",
+    )
+    defaults = {name: _setting_defaults(name) for name in PAPER_SETTINGS}
     for item in _config_fields():
         flag = "--" + item.name.replace("_", "-")
-        default = MCP_ATLAS_SETTING.get(item.name, item.default)
-        help_text = FIELD_HELP[item.name]
+        shown = " | ".join(
+            f"{name}: {json.dumps(values[item.name], default=list)}"
+            for name, values in defaults.items()
+        )
+        help_text = f"{FIELD_HELP[item.name]} [{shown}]".replace("%", "%%")
         kind = str(item.type)
+        common = {"default": argparse.SUPPRESS, "help": help_text}
         if kind == "bool":
-            group.add_argument(
-                flag, action=argparse.BooleanOptionalAction, default=default, help=help_text
-            )
+            group.add_argument(flag, action=argparse.BooleanOptionalAction, **common)
         elif kind.startswith("Mapping"):
-            group.add_argument(
-                flag, type=_json_object, default=default, metavar="JSON", help=help_text
-            )
+            group.add_argument(flag, type=_json_object, metavar="JSON", **common)
         elif kind.startswith("tuple"):
-            group.add_argument(
-                flag, type=_csv, default=default, metavar="A,B", help=help_text
-            )
+            group.add_argument(flag, type=_csv, metavar="A,B", **common)
         elif kind.startswith("int"):
-            group.add_argument(flag, type=int, default=default, help=help_text)
+            group.add_argument(flag, type=int, **common)
         elif item.name == "task_semantics":
-            group.add_argument(flag, choices=TASK_SEMANTICS, default=default, help=help_text)
+            group.add_argument(flag, choices=TASK_SEMANTICS, **common)
+        elif item.name == "verifier_payload_labels":
+            group.add_argument(flag, choices=tuple(VERIFIER_PAYLOAD_LABELS), **common)
         else:
-            group.add_argument(flag, default=default, help=help_text)
+            group.add_argument(flag, **common)
 
 
 def build_arg_parser() -> argparse.ArgumentParser:
@@ -738,11 +787,18 @@ def build_arg_parser() -> argparse.ArgumentParser:
         "--log-file", type=Path, help="Defaults to the telemetry path with a .log suffix"
     )
     serving.add_argument("--log-level", choices=("DEBUG", "INFO", "WARNING"), default="INFO")
+    serving.add_argument(
+        "--tool-class-file",
+        type=Path,
+        help="JSON {tool: bool} of the benchmark's own read/write labels (true: state-changing); "
+        f"overrides the name heuristics for the tools it lists. Sets ${TOOL_CLASS_FILE_ENV}",
+    )
     return parser
 
 
 def build_gateway_config(args: argparse.Namespace) -> GatewayConfig:
-    values = {item.name: getattr(args, item.name) for item in _config_fields()}
+    values = _setting_defaults(args.setting)
+    values.update({name: getattr(args, name) for name in values if hasattr(args, name)})
     if values["verifier_reasoning_effort"] in ("off", ""):
         values["verifier_reasoning_effort"] = None
     return GatewayConfig(weak_model=args.weak_model, strong_model=args.strong_model, **values)
@@ -750,6 +806,13 @@ def build_gateway_config(args: argparse.Namespace) -> GatewayConfig:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_arg_parser().parse_args(argv)
+    if args.tool_class_file:
+        os.environ[TOOL_CLASS_FILE_ENV] = str(args.tool_class_file.expanduser().resolve())
+    try:
+        # Fail at startup, not on the first request, when the tool-class file is unusable.
+        tool_classes = official_mutates_map()
+    except ValueError as error:
+        raise SystemExit(str(error)) from error
     gateway_config = build_gateway_config(args)
     strong_backend = OpenAIBackend(
         args.strong_base_url, args.strong_api_key, args.timeout, auth_scheme=args.strong_auth_scheme
@@ -787,6 +850,13 @@ def main(argv: list[str] | None = None) -> int:
             raise SystemExit("--trace must be a new file; use an isolated path for each run")
     LOG.info("SpecAgent gateway listening on http://%s:%d/v1", args.host, args.port)
     LOG.info("config=%s", json.dumps(dataclasses.asdict(gateway_config), default=list))
+    if tool_classes is not None:
+        LOG.info(
+            "tool_classes=%s labels=%d state_changing=%d",
+            os.environ[TOOL_CLASS_FILE_ENV],
+            len(tool_classes),
+            sum(tool_classes.values()),
+        )
     LOG.info("weak_endpoint=%s strong_endpoint=%s", weak_backend.base_url, strong_backend.base_url)
     LOG.info("telemetry=%s log_file=%s", telemetry, log_file)
     try:

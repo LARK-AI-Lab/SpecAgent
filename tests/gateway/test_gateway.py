@@ -293,6 +293,69 @@ def test_text_reply_is_verified_before_reaching_user() -> None:
     assert payload["proposed_trajectory"][0]["action"]["type"] == "message"
 
 
+def test_unreviewed_reply_commits_with_its_reads() -> None:
+    backend = FakeBackend(
+        [completion(("r1", "read_file", {"path": "a"})), completion(content="Here it is.")]
+    )
+    gateway = SpeculativeToolGateway(backend, config(review_replies=False))
+
+    first = gateway.handle(request())
+    decision = gateway.handle(request(messages=after_call(first)))
+
+    assert decision.source == "runtime_auto_accept"
+    assert decision.boundary == "message"
+    assert decision.verifier_accepted_steps == decision.candidate_length == 2
+    assert decision.response["choices"][0]["message"]["content"] == "Here it is."
+    assert models(backend) == ["weak", "weak"]
+    assert gateway.state.candidate == []
+    assert gateway.state.confirmed[-1].action == {"type": "message", "content": "Here it is."}
+
+
+def test_unreviewed_replies_still_review_state_changing_calls() -> None:
+    backend = FakeBackend([completion(("w1", "write_file", {"path": "a"})), verdict(1)])
+    gateway = SpeculativeToolGateway(backend, config(review_replies=False))
+
+    decision = gateway.handle(request())
+
+    assert decision.source == "weak_verified"
+    assert models(backend) == ["weak", "strong"]
+
+
+def test_weak_output_cap_reaches_weak_drafts_only() -> None:
+    backend = FakeBackend(
+        [completion(("w1", "write_file", {"path": "a"})), verdict(0), completion(content="ok")]
+    )
+    gateway = SpeculativeToolGateway(backend, config(weak_max_tokens=8192))
+
+    gateway.handle(request())
+
+    assert [(c["model"], c["max_tokens"]) for c in backend.calls] == [
+        ("weak", 8192), ("strong", 1024), ("strong", 16384)
+    ]
+    assert SpeculativeToolGateway(FakeBackend([]), config()).config.weak_max_tokens is None
+    with pytest.raises(ValueError, match="weak_max_tokens"):
+        config(weak_max_tokens=0)
+
+
+def test_legacy_payload_labels_change_only_the_label_strings() -> None:
+    payloads = {}
+    for labels in ("current", "legacy"):
+        backend = FakeBackend([completion(("w1", "write_file", {"path": "a"})), verdict(1)])
+        SpeculativeToolGateway(backend, config(verifier_payload_labels=labels)).handle(request())
+        payloads[labels] = verifier_payload(backend, 1)
+    legacy = payloads["legacy"]
+    assert legacy["task"]["task_id"] == legacy["anchors"]["task_id"] == "vibelifebench-session"
+    assert legacy["input_integrity"]["profile"] == "legacy_trim_v1"
+    for payload in payloads.values():
+        for key in ("profile", "scope", "source_hash"):
+            payload["input_integrity"].pop(key)
+        payload["task"].pop("task_id")
+        payload["anchors"].pop("task_id")
+    assert payloads["legacy"] == payloads["current"]
+    with pytest.raises(ValueError, match="payload labels"):
+        config(verifier_payload_labels="other")
+
+
 def test_hallucinated_tool_name_is_released_without_verification() -> None:
     # ``writing`` is not among the request's tools, so it cannot execute; gating it would only
     # buy a Strong call for a runtime error the drafting model can recover from.

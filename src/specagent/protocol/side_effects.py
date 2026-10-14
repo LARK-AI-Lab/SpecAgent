@@ -16,11 +16,17 @@ set is never gated: the call cannot execute, the runtime returns an error, and p
 verification for a hallucinated tool name buys nothing. Real read tools whose names miss the
 ``verb_`` marker form (``web_fetch``, ``memory_get``, ``*__resources_list``) are covered by the
 exact list and the suffix markers below.
+
+A benchmark that labels its own tools can supply those labels as a JSON file named by
+``SPECAGENT_TOOL_CLASS_FILE``; they take precedence over every list and heuristic here.
 """
 
 from __future__ import annotations
 
+import json
+import os
 from collections.abc import Collection
+from pathlib import Path
 from typing import Any
 
 # Action dicts without a tool name that still mutate state (a reply to the user is irrevocable).
@@ -221,6 +227,43 @@ def _http_method(action: Any) -> str:
     return str(arguments.get("method") or "").upper()
 
 
+# Official per-benchmark tool labels, read from the JSON file named by ``SPECAGENT_TOOL_CLASS_FILE``
+# (``{tool_name: bool}``; True gates). Adapters that generate this file from the benchmark's own
+# annotations (e.g. VitaBench's ``@is_tool(ToolType.WRITE)`` decorators) take precedence over
+# every heuristic and list in this module for the names they cover; names absent from the file
+# fall through to the generic rules unchanged. With the variable unset nothing here is active.
+# With it set, an unreadable or malformed file is an error, never a silent fallback.
+TOOL_CLASS_FILE_ENV = "SPECAGENT_TOOL_CLASS_FILE"
+_OFFICIAL_CACHE: dict[str, dict[str, bool]] = {}
+
+
+def load_official_tool_classes(path: str | os.PathLike[str]) -> dict[str, bool]:
+    """Parse and validate a tool-class file; raise ValueError if it is unusable."""
+    try:
+        data = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (OSError, ValueError) as exc:
+        raise ValueError(f"{TOOL_CLASS_FILE_ENV}={path}: cannot read JSON: {exc}") from exc
+    if not isinstance(data, dict):
+        raise ValueError(f"{TOOL_CLASS_FILE_ENV}={path}: expected a JSON object {{tool: bool}}")
+    bad = [k for k, v in data.items() if not isinstance(k, str) or not isinstance(v, bool)]
+    if bad:
+        raise ValueError(
+            f"{TOOL_CLASS_FILE_ENV}={path}: non-bool labels for {sorted(map(str, bad))[:5]}"
+        )
+    return dict(data)
+
+
+def official_mutates_map() -> dict[str, bool] | None:
+    """The validated table for the file in the environment, or None when unset."""
+    path = os.environ.get(TOOL_CLASS_FILE_ENV)
+    if not path:
+        return None
+    table = _OFFICIAL_CACHE.get(path)
+    if table is None:
+        table = _OFFICIAL_CACHE[path] = load_official_tool_classes(path)
+    return table
+
+
 def action_mutates_state(
     action: Any,
     *,
@@ -242,6 +285,13 @@ def action_mutates_state(
         return unknown_mutates
     if known_tools is not None and name not in known_tools:
         return False
+    official = official_mutates_map()
+    if official is not None:
+        if name in official:
+            return official[name]
+        suffix = _normalized_suffix(name)
+        if suffix in official:
+            return official[suffix]
     if name in readonly_tools:
         return False
     candidates = (name, _normalized_suffix(name))

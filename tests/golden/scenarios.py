@@ -10,7 +10,9 @@ from __future__ import annotations
 
 import itertools
 import json
+import os
 from collections import deque
+from pathlib import Path
 from typing import Any
 from unittest import mock
 
@@ -62,7 +64,8 @@ class Recorder:
         return self.responses.popleft()
 
 
-def drive(gateway_cls, config, responses: list[dict], turns: int, user: str) -> dict:
+def drive(gateway_cls, config, responses: list[dict], turns: int, user: str,
+          tools: list[dict] = TOOLS, opening: tuple[dict, ...] = ()) -> dict:
     """Run a client loop for `turns` gateway requests; return the full record."""
     backend = Recorder(responses)
     counter = itertools.count()
@@ -74,23 +77,23 @@ def drive(gateway_cls, config, responses: list[dict], turns: int, user: str) -> 
     with mock.patch("specagent.runtime.gateway.uuid4", _U):
         gateway = gateway_cls(backend, config)
         messages: list[dict] = [{"role": "system", "content": "You are an agent."},
-                                {"role": "user", "content": user}]
+                                *opening, {"role": "user", "content": user}]
         delivered = []
         error = None
         try:
-            _loop(gateway, backend, messages, delivered, turns)
+            _loop(gateway, backend, messages, delivered, turns, tools)
         except Exception as exc:  # the failure itself is part of the behaviour
             error = f"{type(exc).__name__}: {exc}"
     return {"backend_calls": backend.calls, "delivered": delivered, "error": error,
             "unused_responses": len(backend.responses)}
 
 
-def _loop(gateway, backend, messages, delivered, turns) -> None:
+def _loop(gateway, backend, messages, delivered, turns, tools) -> None:
     for _ in range(turns):
         if not backend.responses:
             break
         decision = gateway.handle({"model": "specagent", "messages": list(messages),
-                                   "tools": TOOLS})
+                                   "tools": tools})
         message = decision.response["choices"][0]["message"]
         delivered.append({"source": decision.source, "boundary": decision.boundary,
                           "accepted": decision.verifier_accepted_steps,
@@ -151,12 +154,110 @@ SCENARIOS: dict[str, tuple[list[dict], int]] = {
 }
 
 
+# VitaBench-shaped sessions (Delivery tools, labels from the benchmark's @is_tool decorators).
+# Only state-changing calls are reviewed: replies and K=6 read chunks commit unreviewed.
+VITA_TOOL_CLASS_FILE = Path(__file__).resolve().parent / "vitabench_tool_classes.json"
+_VITA_PARAMS = {
+    "delivery_store_search_recommend": {"keywords": {"type": "array",
+                                                     "items": {"type": "string"}}},
+    "get_delivery_store_info": {"store_id": {"type": "string"}},
+    "get_delivery_product_info": {"product_id": {"type": "string"}},
+    "weather": {"city": {"type": "string"}},
+    "longitude_latitude_to_distance": {"origin": {"type": "string"},
+                                       "destination": {"type": "string"}},
+    "create_delivery_order": {"store_id": {"type": "string"}, "product_id": {"type": "string"},
+                              "address": {"type": "string"}},
+    "pay_delivery_order": {"order_id": {"type": "string"}},
+    "modify_delivery_order": {"order_id": {"type": "string"}, "note": {"type": "string"}},
+}
+VITA_TOOLS = [
+    {"type": "function", "function": {"name": name, "description": name,
+                                      "parameters": {"type": "object", "properties": params,
+                                                     "required": sorted(params)}}}
+    for name, params in _VITA_PARAMS.items()
+]
+VITA_OPENING = ({"role": "assistant", "content": "Hello, how can I help you?"},)
+
+SEARCH = ("delivery_store_search_recommend", {"keywords": ["noodles"]})
+STORE = ("get_delivery_store_info", {"store_id": "S1"})
+PRODUCT = ("get_delivery_product_info", {"product_id": "P2"})
+WEATHER = ("weather", {"city": "Beijing"})
+DISTANCE = ("longitude_latitude_to_distance", {"origin": "home", "destination": "S1"})
+ORDER_ARGS = {"store_id": "S1", "product_id": "P2", "address": "Room 301"}
+BAD_ORDER = ("create_delivery_order", {**ORDER_ARGS, "product_id": "P9"})
+ORDER = ("create_delivery_order", ORDER_ARGS)
+PAY = ("pay_delivery_order", {"order_id": "O1"})
+BAD_PAY = ("pay_delivery_order", {"order_id": "O7"})
+NOTE = ("modify_delivery_order", {"order_id": "O1", "note": "no chili"})
+
+VITA_SCENARIOS: dict[str, tuple[list[dict], int]] = {
+    # replies commit unreviewed, with the reads drafted before them
+    "vita_replies_unreviewed": ([completion(SEARCH), completion(content="Which store?"),
+                                 completion(STORE), completion(content="S1 is open.")], 4),
+    # reads then an order held and accepted, then a payment accepted against the history
+    "vita_write_accepted": ([completion(SEARCH), completion(STORE), completion(ORDER),
+                             verdict(3, reason=None), completion(PAY), verdict(1, reason=None),
+                             completion(content="Your order is paid.")], 5),
+    # a wrong order replaced by the verifier's grounded order
+    "vita_write_fused_replacement": ([completion(STORE), completion(BAD_ORDER),
+                                      verdict(1, {"tool": ORDER[0], "arguments": ORDER[1]},
+                                              "wrong product"),
+                                      completion(PAY), verdict(1, reason=None)], 3),
+    # a wrong order repaired by a Strong turn with a read and the order
+    "vita_write_strong_repair": ([completion(BAD_ORDER), verdict(0, None, "wrong product"),
+                                  completion(PRODUCT, ORDER), completion(PAY),
+                                  verdict(1, reason=None), completion(content="Done.")], 4),
+    # a replacement that replays the rejected order is discarded; Strong replies instead
+    "vita_replacement_replays_rejected": ([completion(BAD_ORDER),
+                                           verdict(0, {"tool": BAD_ORDER[0],
+                                                       "arguments": BAD_ORDER[1]}),
+                                           completion(content="Which product did you want?"),
+                                           completion(ORDER), verdict(1, reason=None)], 3),
+    # K=6 reads, generic tools among them, commit unreviewed; then a reply
+    "vita_horizon_reads": ([completion(SEARCH), completion(STORE), completion(WEATHER),
+                            completion(DISTANCE), completion(PRODUCT), completion(STORE),
+                            completion(WEATHER), completion(content="It will rain; order?")],
+                           8),
+    # the same read repeated: no review ever runs on a pure read loop
+    "vita_read_loop": ([completion(STORE) for _ in range(9)]
+                       + [completion(content="S1 sells noodles.")], 10),
+    # a parallel read and order: the read is released, Strong repairs on the next request
+    "vita_partial_batch": ([completion(STORE, BAD_ORDER), verdict(1, None, "wrong product"),
+                            completion(ORDER), completion(PAY), verdict(1, reason=None)], 3),
+    # an executed read is rejected at the order boundary; Strong repairs from the history
+    "vita_executed_read_rejected": ([completion(SEARCH), completion(BAD_ORDER),
+                                     verdict(0, None, "searched the wrong cuisine"),
+                                     completion(STORE)], 2),
+    # two rejections in one session: Strong's earlier reasoning is re-attached
+    "vita_two_repairs": ([completion(BAD_ORDER), verdict(0, None, "wrong product"),
+                          completion(ORDER), completion(BAD_PAY), verdict(0, None, "wrong order"),
+                          completion(PAY), completion(NOTE), verdict(1, reason=None)], 4),
+    # a malformed verdict fails closed onto the Strong repair
+    "vita_malformed_verdict": ([completion(ORDER), completion(content="not json"),
+                                completion(content="still not json"), completion(ORDER)], 1),
+}
+
+# Scenarios and environment that only one paper config runs.
+CONFIG_SCENARIOS: dict[str, dict[str, tuple[list[dict], int]]] = {"vitabench": VITA_SCENARIOS}
+CONFIG_ENV: dict[str, dict[str, str]] = {
+    "vitabench": {"SPECAGENT_TOOL_CLASS_FILE": str(VITA_TOOL_CLASS_FILE)},
+}
+
+
 def run_all(gateway_cls, configs: dict[str, Any]) -> dict:
     out = {}
     for config_name, config in configs.items():
-        for name, (responses, turns) in SCENARIOS.items():
-            out[f"{config_name}/{name}"] = drive(
-                gateway_cls, config, [json.loads(json.dumps(r)) for r in responses], turns,
-                user=f"Task for {name}",
-            )
+        with mock.patch.dict(os.environ):
+            os.environ.pop("SPECAGENT_TOOL_CLASS_FILE", None)
+            os.environ.update(CONFIG_ENV.get(config_name, {}))
+            for name, (responses, turns) in SCENARIOS.items():
+                out[f"{config_name}/{name}"] = drive(
+                    gateway_cls, config, [json.loads(json.dumps(r)) for r in responses], turns,
+                    user=f"Task for {name}",
+                )
+            for name, (responses, turns) in CONFIG_SCENARIOS.get(config_name, {}).items():
+                out[f"{config_name}/{name}"] = drive(
+                    gateway_cls, config, [json.loads(json.dumps(r)) for r in responses], turns,
+                    user=f"Task for {name}", tools=VITA_TOOLS, opening=VITA_OPENING,
+                )
     return out

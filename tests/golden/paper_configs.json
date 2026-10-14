@@ -41,5 +41,31 @@
   ],
   "verifier_history_reasoning": false,
   "strict_action_validation": false
+ },
+ "vitabench": {
+  "horizon": 6,
+  "weak_reasoning_effort": "high",
+  "weak_max_tokens": 8192,
+  "weak_extra_body": {
+   "chat_template_kwargs": {
+    "enable_thinking": true
+   }
+  },
+  "strong_extra_body": {
+   "chat_template_kwargs": {
+    "enable_thinking": true
+   },
+   "separate_reasoning": true
+  },
+  "verifier_extra_body": {
+   "chat_template_kwargs": {
+    "enable_thinking": false
+   },
+   "separate_reasoning": true
+  },
+  "verifier_include_reasoning": false,
+  "review_replies": false,
+  "workspace_dir": "/terrarium/openclaw/workspace",
+  "verifier_payload_labels": "legacy"
  }
 }

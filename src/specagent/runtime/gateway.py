@@ -10,7 +10,9 @@ response the client receives. It maps the prefix-commit protocol onto that const
   client sees it. Irrevocable steps are state-changing tool calls and text replies to the user (a
   reply cannot be unsent). A reply is recorded as a ``{"type": "message"}`` step whose observation
   is the user's next message.
-- A candidate that reaches the horizon ``K`` with reads only commits without review.
+- A candidate that reaches the horizon ``K`` with reads only commits without review. With
+  ``review_replies`` off, a reply also commits without review, as in tau2 and VitaBench, where
+  only state-changing tool calls are reviewed.
 - Strong answers with ``{reason, accepted_steps, replacement_action}``. On a rejection a
   schema-valid replacement commits directly; otherwise Strong takes one repair turn, whose full
   multi-call turn commits without re-verification. A rejected read that already ran cannot be
@@ -75,6 +77,22 @@ FUSABLE_BOUNDARIES = frozenset({"message", "mutation"})
 VERIFIER_TASK_ID = "session"
 FALLBACK_INSTRUCTION = "Continue the active task."
 
+# Identifiers in the review payload: (task_id, input_integrity profile, input_integrity scope).
+# "legacy" are the strings of the earlier code the paper's VitaBench run used; the two label sets
+# differ in these strings only.
+VERIFIER_PAYLOAD_LABELS: dict[str, tuple[str, str, str]] = {
+    "current": (
+        VERIFIER_TASK_ID,
+        "trimmed",
+        "runtime-supplied evidence; long content trimmed to size caps",
+    ),
+    "legacy": (
+        "vibelifebench-session",
+        "legacy_trim_v1",
+        "runtime-supplied evidence; truncated only for legacy compatibility",
+    ),
+}
+
 # Transient note appended to the next Weak draft request after a rejection is cleared
 # (weak_review_hint). It never enters the delivered transcript.
 WEAK_REVIEW_HINT_NOTE = (
@@ -137,6 +155,8 @@ class GatewayConfig:
     # Draft batching cap: a candidate of K reads commits without review.
     horizon: int = 4
     weak_reasoning_effort: str = "low"
+    # Output cap for every Weak draft; None sends none. A capped draft is the truncated response.
+    weak_max_tokens: int | None = None
     verifier_reasoning_effort: str | None = None
     correction_reasoning_effort: str = "high"
     verifier_max_tokens: int = 1024
@@ -153,6 +173,8 @@ class GatewayConfig:
     verifier_extra_body: Mapping[str, Any] | None = None
     # Workspace root shown to the verifier as anchors.workspace_dir; empty omits the anchor.
     workspace_dir: str = ""
+    # One of VERIFIER_PAYLOAD_LABELS.
+    verifier_payload_labels: str = "current"
     # One of TASK_SEMANTICS.
     task_semantics: str = "generic"
     # Tools that are read-only although their name looks like a write (e.g. a command runner
@@ -185,6 +207,9 @@ class GatewayConfig:
     strict_answer_review: bool = False
     # Text appended verbatim to the verifier system prompt.
     verifier_prompt_suffix: str | None = None
+    # Review a text reply before it is delivered. False commits a reply turn (and the reads
+    # drafted before it) without review, so only state-changing tool calls are reviewed.
+    review_replies: bool = True
     # Boundaries at which a verifier replacement_action may commit; elsewhere it is discarded and
     # Strong repairs. Subset of FUSABLE_BOUNDARIES.
     fuse_correction_boundaries: tuple[str, ...] = ("message", "mutation")
@@ -216,6 +241,8 @@ class GatewayConfig:
     def __post_init__(self) -> None:
         if self.horizon < 1:
             raise ValueError("horizon must be positive")
+        if self.weak_max_tokens is not None and self.weak_max_tokens < 1:
+            raise ValueError("weak_max_tokens must be positive")
         if self.verifier_max_tokens < 1:
             raise ValueError("verifier_max_tokens must be positive")
         if self.corrector_max_tokens < 1:
@@ -224,6 +251,8 @@ class GatewayConfig:
             raise ValueError("verifier input limit must be positive")
         if self.task_semantics not in TASK_SEMANTICS:
             raise ValueError("unknown task semantics")
+        if self.verifier_payload_labels not in VERIFIER_PAYLOAD_LABELS:
+            raise ValueError("unknown verifier payload labels")
         if not set(self.fuse_correction_boundaries) <= FUSABLE_BOUNDARIES:
             raise ValueError(
                 f"fuse_correction_boundaries must be a subset of {sorted(FUSABLE_BOUNDARIES)}"
@@ -467,7 +496,7 @@ def _task_context(
         instruction = instruction[:12000]
         system = system[:24000]
     return TaskContext(
-        task_id=VERIFIER_TASK_ID,
+        task_id=VERIFIER_PAYLOAD_LABELS[config.verifier_payload_labels][0],
         instruction=instruction,
         system_constraints=(system,) if system else (),
         tool_contracts=_tool_contracts(request),
@@ -850,6 +879,8 @@ class SpeculativeToolGateway:
     ) -> dict[str, Any]:
         self._check_cancelled()
         started = perf_counter()
+        if phase == "weak_act" and max_tokens is None:
+            max_tokens = self.config.weak_max_tokens
         extra_body = {
             "weak_act": self.config.weak_extra_body,
             "strong_verify": self.config.verifier_extra_body,
@@ -1243,12 +1274,13 @@ class SpeculativeToolGateway:
             recent_observation_chars=config.verifier_recent_observation_chars,
             uniform=config.verifier_append_only,
         )
+        _, profile, scope = VERIFIER_PAYLOAD_LABELS[config.verifier_payload_labels]
         payload["input_integrity"] = {
             "status": "truncated" if omissions else "complete",
-            "profile": "trimmed",
+            "profile": profile,
             "omissions": omissions,
             "source_hash": content_hash(source_payload),
-            "scope": "runtime-supplied evidence; long content trimmed to size caps",
+            "scope": scope,
         }
         if not (config.verifier_history_reasoning and config.verifier_include_reasoning):
             terminal_key = next(reversed(payload), None)
@@ -2024,7 +2056,16 @@ class SpeculativeToolGateway:
         elif mutating:
             boundary = "mutation"
         elif len(self.state.candidate) >= self.config.horizon:
-            # K reads commit without review.
+            boundary = "horizon"
+        else:
+            return self._decision(
+                response=self._deliverable(weak_response),
+                source="weak_read",
+                candidate_length=len(self.state.candidate),
+                mutating=False,
+            )
+        if boundary == "horizon" or (boundary == "message" and not self.config.review_replies):
+            # K reads commit without review, and so does an unreviewed reply with its reads.
             candidate_snapshot = self._render_candidate()
             accepted = len(self.state.candidate)
             self.state.confirmed.extend(self._mark_sent(step) for step in self.state.candidate)
@@ -2033,17 +2074,10 @@ class SpeculativeToolGateway:
                 response=self._deliverable(weak_response),
                 source="runtime_auto_accept",
                 candidate_length=accepted,
-                mutating=False,
-                boundary="horizon",
+                mutating=mutating,
+                boundary=boundary,
                 verifier_accepted_steps=accepted,
                 candidate_steps=candidate_snapshot,
-            )
-        else:
-            return self._decision(
-                response=self._deliverable(weak_response),
-                source="weak_read",
-                candidate_length=len(self.state.candidate),
-                mutating=False,
             )
 
         candidate_snapshot = self._render_candidate()

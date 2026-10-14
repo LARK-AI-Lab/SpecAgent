@@ -51,6 +51,32 @@ def test_mcp_atlas_setting_matches_the_recorded_paper_setting():
     assert server.MCP_ATLAS_SETTING == _paper_setting("mcp_atlas")
 
 
+def test_setting_vitabench_yields_the_recorded_vitabench_setting():
+    assert server.VITABENCH_SETTING == _paper_setting("vitabench")
+    expected = GatewayConfig(
+        weak_model="weak", strong_model="strong", **_paper_setting("vitabench")
+    )
+    assert _config("--setting", "vitabench") == expected
+
+
+def test_explicit_flags_override_the_setting():
+    config = _config("--setting", "vitabench", "--horizon", "4", "--review-replies")
+    assert (config.horizon, config.review_replies, config.weak_max_tokens) == (4, True, 8192)
+    assert _config("--weak-max-tokens", "100").weak_max_tokens == 100
+
+
+def test_unusable_tool_class_file_stops_startup(tmp_path, monkeypatch):
+    monkeypatch.setenv(server.TOOL_CLASS_FILE_ENV, "")
+    bad = tmp_path / "classes.json"
+    bad.write_text('{"create_delivery_order": "write"}', encoding="utf-8")
+    with pytest.raises(SystemExit, match="non-bool labels"):
+        server.main([*ENDPOINT_ARGS, "--tool-class-file", str(bad)])
+    assert server.os.environ[server.TOOL_CLASS_FILE_ENV] == str(bad.resolve())
+    monkeypatch.setenv(server.TOOL_CLASS_FILE_ENV, str(tmp_path / "missing.json"))
+    with pytest.raises(SystemExit, match="cannot read JSON"):
+        server.main(ENDPOINT_ARGS)
+
+
 # (b) One flag per configuration field ------------------------------------------------------
 
 
