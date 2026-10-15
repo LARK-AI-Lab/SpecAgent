@@ -68,12 +68,12 @@ serving is out of scope (the paper serves the Weak model with SGLang).
 Every runner defaults to the paper's setting; each directory has a README with setup and run
 commands.
 
-| Benchmark | Directory | Held for review | K | Runs |
-| --- | --- | --- | :---: | :---: |
-| [τ²-Bench](https://github.com/sierra-research/tau2-bench) Airline, Retail | [`benchmarks/tau2`](benchmarks/tau2) | writes, transfer to a human | 6 | 3 |
-| [AutomationBench](https://arxiv.org/abs/2604.18934) | [`benchmarks/automationbench`](benchmarks/automationbench) | writes, final message | 8 | 1 |
-| [VitaBench](https://github.com/meituan-longcat/vitabench) Delivery | [`benchmarks/vitabench`](benchmarks/vitabench) | writes (the benchmark's own labels) | 6 | 2 |
-| [MCP-Atlas](https://github.com/scaleapi/mcp-atlas) | [`benchmarks/mcp_atlas`](benchmarks/mcp_atlas) | writes, final answer | 6 | 1 |
+| Benchmark | Directory | Held for review |
+| --- | --- | --- |
+| [τ²-Bench](https://github.com/sierra-research/tau2-bench) Airline, Retail | [`benchmarks/tau2`](benchmarks/tau2) | writes, transfer to a human |
+| [AutomationBench](https://arxiv.org/abs/2604.18934) | [`benchmarks/automationbench`](benchmarks/automationbench) | writes, final message |
+| [VitaBench](https://github.com/meituan-longcat/vitabench) Delivery | [`benchmarks/vitabench`](benchmarks/vitabench) | writes (the benchmark's own labels) |
+| [MCP-Atlas](https://github.com/scaleapi/mcp-atlas) | [`benchmarks/mcp_atlas`](benchmarks/mcp_atlas) | writes, final answer |
 
 ## Repository layout
 
