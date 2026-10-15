@@ -10,7 +10,8 @@ gateway; the user simulator and the judge call their own endpoints.
 
 The paper runs the Delivery domain: all 100 tasks, in English, one trial per task, at most 100
 steps, eight tasks in parallel. The user simulator and the judge are DeepSeek-V4-Flash-0731 for
-every method. These are the defaults of `run_eval.py`.
+every method. These are the defaults of `run_eval.py`; the paper reports the mean of two runs of
+every method.
 
 SpecAgent (`--setting vitabench`):
 
