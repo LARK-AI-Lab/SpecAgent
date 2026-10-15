@@ -11,9 +11,9 @@ VitaBench resolves endpoints per model name from ``VITA_MODEL_CONFIG_PATH`` and
                gateway (it would share the agent's session)
   evaluator -> direct endpoint; same reasoning
 
-The generated file carries no secrets: API keys come from the environment at
-runtime via SPECAGENT_*_API_KEY -- write them into this file only through
-``--*-api-key`` flags on run_eval.py, never hardcoded.
+The generated file holds whatever API keys are passed in (``--*-api-key`` flags or
+SPECAGENT_*_API_KEY), so it is written with mode 600 and must not be committed;
+the default output directories are git-ignored.
 """
 
 from __future__ import annotations

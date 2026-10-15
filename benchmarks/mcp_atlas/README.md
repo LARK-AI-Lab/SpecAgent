@@ -27,7 +27,9 @@ paper's MCP-Atlas setting.
 
 ## Tasks
 
-`data/tasks.csv` holds the 107 public tasks whose ground-truth trajectories use only servers
+The task files are taken from the public MCP-Atlas dataset
+([ScaleAI/MCP-Atlas](https://huggingface.co/datasets/ScaleAI/MCP-Atlas)) and remain under its
+terms. `data/tasks.csv` holds the 107 public tasks whose ground-truth trajectories use only servers
 that run without private API keys (the harness's default keyless servers plus `github`).
 `data/excluded_task_ids.txt` lists 6 tasks on which the harness did not complete runs
 reliably; `data/tasks_eval.csv` is the remaining 101 tasks used in the paper.

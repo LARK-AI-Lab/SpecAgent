@@ -1,0 +1,39 @@
+SpecAgent includes material from the following third-party projects. Each remains
+under its own license; this repository's MIT license covers only SpecAgent's own code.
+
+tau2-bench (https://github.com/sierra-research/tau2-bench), MIT License,
+Copyright (c) 2025 Sierra Research.
+  benchmarks/tau2/apply_orchestrator_patch.py quotes source excerpts it patches.
+
+VitaBench (https://github.com/meituan-longcat/vitabench), MIT License,
+Copyright (c) 2025 Sierra Research; Copyright (c) 2025 Meituan.
+  benchmarks/vitabench/apply_session_patch.py quotes source excerpts it patches.
+
+MCP-Atlas (https://github.com/scaleapi/mcp-atlas), MIT License,
+Copyright (c) 2026 Scale.
+  benchmarks/mcp_atlas/harness/mcp-atlas.patch contains upstream source context.
+  benchmarks/mcp_atlas/data/*.csv are tasks from the MCP-Atlas dataset
+  (https://huggingface.co/datasets/ScaleAI/MCP-Atlas), redistributed under the
+  dataset's terms.
+
+AutomationBench (https://github.com/zapier/AutomationBench), MIT License,
+Copyright (c) 2026 Zapier, Inc.
+  Not redistributed; benchmarks/automationbench runs against a user checkout.
+
+The included portions are used under the MIT License of their projects:
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this
+software and associated documentation files (the "Software"), to deal in the Software
+without restriction, including without limitation the rights to use, copy, modify, merge,
+publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or
+substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+DEALINGS IN THE SOFTWARE.

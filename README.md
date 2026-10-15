@@ -126,4 +126,5 @@ tests that read the benchmark run when `VITABENCH_DIR` points at a checkout.
 
 ## License
 
-[MIT](LICENSE)
+[MIT](LICENSE). The benchmark patches and the MCP-Atlas task files include material from
+third-party benchmarks under their own licenses; see [NOTICE](NOTICE).

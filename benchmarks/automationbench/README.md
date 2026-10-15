@@ -12,8 +12,18 @@ support; 600 tasks), one trajectory per task, at most 50 turns, eight tasks in p
 
 ## Setup
 
-Install AutomationBench 1.0.6 and verifiers 0.2.1 into the same environment as this
-repository.
+`run.py` imports the benchmark from a source checkout, so clone AutomationBench at its 1.0.6
+release and point `AUTOMATIONBENCH_ROOT` at it (or place the checkout at
+`third_party/AutomationBench` in this repository):
+
+```bash
+git clone https://github.com/zapier/AutomationBench.git
+git -C AutomationBench checkout 6d210543b7a046f0f451c828cd2dadef774276eb   # 1.0.6
+pip install -e ./AutomationBench "verifiers==0.2.1"
+export AUTOMATIONBENCH_ROOT=$PWD/AutomationBench
+```
+
+Run the commands below from this directory.
 
 ## Run
 

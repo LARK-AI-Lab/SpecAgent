@@ -9,3 +9,6 @@ results/
 secrets/
 .DS_Store
 .ruff_cache/
+out/
+.env
+*.env
