@@ -6,7 +6,8 @@
 
 Zilin Wang, Yinhong Liu, Chao Chen, Qun Liu, Zhijiang Guo
 
-[![Paper](https://img.shields.io/badge/paper-arXiv%20(coming%20soon)-b31b1b)](#citation)
+[![arXiv](https://img.shields.io/badge/arXiv-2610.21463-b31b1b)](https://arxiv.org/abs/2610.21463)
+[![Project page](https://img.shields.io/badge/project-page-c66a49)](https://lark-ai-lab.github.io/specagent.github.io/)
 [![Python](https://img.shields.io/badge/python-3.10%2B-3776ab)](pyproject.toml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-green)](LICENSE)
 
@@ -119,7 +120,7 @@ tests that read the benchmark run when `VITABENCH_DIR` points at a checkout.
 @article{wang2026specagent,
   title   = {Trajectory-Level Speculation with Semantic Verification for Tool-Using Agents},
   author  = {Wang, Zilin and Liu, Yinhong and Chen, Chao and Liu, Qun and Guo, Zhijiang},
-  journal = {arXiv preprint},
+  journal = {arXiv preprint arXiv:2610.21463},
   year    = {2026}
 }
 ```
